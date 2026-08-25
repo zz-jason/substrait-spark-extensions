@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/zzjason/substrait-spark-extensions/protocol/contract.schema.json",
+  "title": "Substrait Spark Extensions Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "protocol",
+    "functions"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "contract.schema.json"
+    },
+    "schemaVersion": {
+      "const": 2
+    },
+    "protocol": {
+      "$ref": "#/$defs/protocol"
+    },
+    "functions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/function"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "substraitVersion",
+        "protoPackage",
+        "planSemanticsTypeUrl",
+        "sparkReadSemanticsTypeUrl",
+        "functionExtensionUrn",
+        "functionExtensionSha256",
+        "canonicalSha256",
+        "canonicalization"
+      ],
+      "properties": {
+        "id": {
+          "const": "io.github.zzjason.substrait-spark-extensions"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "substraitVersion": {
+          "const": "0.98.0"
+        },
+        "protoPackage": {
+          "const": "io.github.zzjason.substrait.spark.v1"
+        },
+        "planSemanticsTypeUrl": {
+          "const": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics"
+        },
+        "sparkReadSemanticsTypeUrl": {
+          "const": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics"
+        },
+        "functionExtensionUrn": {
+          "const": "extension:io.github.zz-jason:functions_spark"
+        },
+        "canonicalSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "canonicalization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "functionExtensionSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "urn",
+        "signature",
+        "kind",
+        "callSites",
+        "options"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.]*$"
+        },
+        "urn": {
+          "type": "string",
+          "pattern": "^extension:[A-Za-z0-9._-]+:[A-Za-z0-9._-]+$"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*:[a-z0-9_]*$"
+        },
+        "kind": {
+          "enum": [
+            "SCALAR",
+            "AGGREGATE",
+            "WINDOW"
+          ]
+        },
+        "callSites": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SCALAR",
+              "AGGREGATE",
+              "WINDOW"
+            ]
+          }
+        },
+        "options": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/enumValues"
+          }
+        },
+        "customDefinition": {
+          "$ref": "#/$defs/customDefinition"
+        }
+      }
+    },
+    "enumValues": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_]*$"
+      }
+    },
+    "customDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arguments",
+        "output"
+      ],
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        },
+        "output": {
+          "$ref": "#/$defs/output"
+        }
+      }
+    },
+    "argument": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "type"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "VALUE",
+                "TYPE"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_?,<>]+$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "values"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ENUM"
+            },
+            "values": {
+              "$ref": "#/$defs/enumValues"
+            }
+          }
+        }
+      ]
+    },
+    "integerFormula": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "value"
+          ],
+          "properties": {
+            "op": {
+              "const": "CONSTANT"
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 38
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "index"
+          ],
+          "properties": {
+            "op": {
+              "enum": [
+                "ARGUMENT_PRECISION",
+                "ARGUMENT_SCALE"
+              ]
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "left",
+            "right"
+          ],
+          "properties": {
+            "op": {
+              "enum": [
+                "ADD",
+                "MIN"
+              ]
+            },
+            "left": {
+              "$ref": "#/$defs/integerFormula"
+            },
+            "right": {
+              "$ref": "#/$defs/integerFormula"
+            }
+          }
+        }
+      ]
+    },
+    "output": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "type"
+          ],
+          "properties": {
+            "op": {
+              "const": "CONCRETE"
+            },
+            "type": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_?]+$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "index"
+          ],
+          "properties": {
+            "op": {
+              "const": "TYPE_ARGUMENT"
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "index",
+            "nullable"
+          ],
+          "properties": {
+            "op": {
+              "const": "SAME_AS_ARGUMENT"
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nullable": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "op",
+            "nullable",
+            "precision",
+            "scale"
+          ],
+          "properties": {
+            "op": {
+              "const": "DECIMAL"
+            },
+            "nullable": {
+              "type": "boolean"
+            },
+            "precision": {
+              "$ref": "#/$defs/integerFormula"
+            },
+            "scale": {
+              "$ref": "#/$defs/integerFormula"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

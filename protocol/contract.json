@@ -1,0 +1,2018 @@
+{
+  "$schema": "contract.schema.json",
+  "schemaVersion": 1,
+  "protocol": {
+    "id": "io.github.zzjason.substrait-spark-extensions",
+    "version": "1.0.0",
+    "substraitVersion": "0.98.0",
+    "protoPackage": "io.github.zzjason.substrait.spark.v1",
+    "planSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics",
+    "sparkReadSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics",
+    "functionExtensionUrn": "extension:io.github.zz-jason:functions_spark",
+    "canonicalSha256": "98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1",
+    "canonicalization": "UTF-8 JSON with sorted keys and compact separators after removing protocol.canonicalSha256",
+    "functionExtensionSha256": "9d9f0d2d4585f2e2166b76293dcfd3e1cdb1ce1483a122ff4a931221be92c9a1"
+  },
+  "functions": [
+    {
+      "id": "aggregate.aggregate_generic.any_value.any",
+      "urn": "extension:io.substrait:functions_aggregate_generic",
+      "signature": "any_value:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "ignore_nulls": [
+          "FALSE",
+          "TRUE"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.aggregate_generic.count.any",
+      "urn": "extension:io.substrait:functions_aggregate_generic",
+      "signature": "count:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.aggregate_generic.count.none",
+      "urn": "extension:io.substrait:functions_aggregate_generic",
+      "signature": "count:",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:fp32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:fp64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:i16",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:i32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:i64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.avg.i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "avg:i8",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.max.fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:fp32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.max.fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:fp64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.max.i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:i16",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.max.i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:i32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.max.i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:i64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.max.i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "max:i8",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:fp32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:fp64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:i16",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:i32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:i64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.min.i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "min:i8",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic.sum.fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:fp32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.sum.fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:fp64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.sum.i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:i16",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.sum.i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:i32",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.sum.i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:i64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic.sum.i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "sum:i8",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic_decimal.avg.dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "avg:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.arithmetic_decimal.max.dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "max:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic_decimal.min.dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "min:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.arithmetic_decimal.sum.dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "sum:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "aggregate.datetime.max.date",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "max:date",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.datetime.max.pts",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "max:pts",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.datetime.max.ptstz",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "max:ptstz",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.datetime.min.date",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "min:date",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.datetime.min.pts",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "min:pts",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.datetime.min.ptstz",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "min:ptstz",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "aggregate.spark.avg.dec",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "avg:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      },
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "decimal<P,S>"
+          }
+        ],
+        "output": {
+          "op": "DECIMAL",
+          "nullable": true,
+          "precision": {
+            "op": "MIN",
+            "left": {
+              "op": "CONSTANT",
+              "value": 38
+            },
+            "right": {
+              "op": "ADD",
+              "left": {
+                "op": "ARGUMENT_PRECISION",
+                "index": 0
+              },
+              "right": {
+                "op": "CONSTANT",
+                "value": 4
+              }
+            }
+          },
+          "scale": {
+            "op": "MIN",
+            "left": {
+              "op": "CONSTANT",
+              "value": 38
+            },
+            "right": {
+              "op": "ADD",
+              "left": {
+                "op": "ARGUMENT_SCALE",
+                "index": 0
+              },
+              "right": {
+                "op": "CONSTANT",
+                "value": 4
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "aggregate.spark.max.any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "max:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "aggregate.spark.min.any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "min:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "aggregate.spark.stddev_samp.fp64",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "stddev_samp:fp64",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "fp64"
+          }
+        ],
+        "output": {
+          "op": "CONCRETE",
+          "type": "fp64?"
+        }
+      }
+    },
+    {
+      "id": "aggregate.spark.sum.dec",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "sum:dec",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE",
+        "WINDOW"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      },
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "decimal<P,S>"
+          }
+        ],
+        "output": {
+          "op": "DECIMAL",
+          "nullable": true,
+          "precision": {
+            "op": "MIN",
+            "left": {
+              "op": "CONSTANT",
+              "value": 38
+            },
+            "right": {
+              "op": "ADD",
+              "left": {
+                "op": "ARGUMENT_PRECISION",
+                "index": 0
+              },
+              "right": {
+                "op": "CONSTANT",
+                "value": 10
+              }
+            }
+          },
+          "scale": {
+            "op": "ARGUMENT_SCALE",
+            "index": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "scalar.arithmetic.abs.fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:fp32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.abs.fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:fp64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.abs.i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.abs.i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.abs.i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.abs.i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "abs:i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.fp32_fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:fp32_fp32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.fp64_fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:fp64_fp64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.add.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "add:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.bitwise_and.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "bitwise_and:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.bitwise_and.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "bitwise_and:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.bitwise_and.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "bitwise_and:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.bitwise_and.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "bitwise_and:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.divide.fp32_fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:fp32_fp32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "IEEE",
+          "LIMIT",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NAN",
+          "NULL"
+        ],
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.divide.fp64_fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:fp64_fp64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "IEEE",
+          "LIMIT",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NAN",
+          "NULL"
+        ],
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.divide.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.divide.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.divide.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.divide.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "divide:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.fp32_fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:fp32_fp32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.fp64_fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:fp64_fp64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.multiply.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "multiply:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.shift_left.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "shift_left:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.shift_left.i64_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "shift_left:i64_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.shift_right.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "shift_right:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.shift_right.i64_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "shift_right:i64_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic.subtract.fp32_fp32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:fp32_fp32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.subtract.fp64_fp64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:fp64_fp64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_TO_EVEN",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.subtract.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.subtract.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.subtract.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.subtract.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "subtract:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic_decimal.abs.dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "abs:dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic_decimal.add.dec_dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "add:dec_dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic_decimal.bitwise_and.dec_dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "bitwise_and:dec_dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.arithmetic_decimal.multiply.dec_dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "multiply:dec_dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic_decimal.subtract.dec_dec",
+      "urn": "extension:io.substrait:functions_arithmetic_decimal",
+      "signature": "subtract:dec_dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.boolean.and.bool",
+      "urn": "extension:io.substrait:functions_boolean",
+      "signature": "and:bool",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.boolean.not.bool",
+      "urn": "extension:io.substrait:functions_boolean",
+      "signature": "not:bool",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.boolean.or.bool",
+      "urn": "extension:io.substrait:functions_boolean",
+      "signature": "or:bool",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.coalesce.any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "coalesce:any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.equal.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "equal:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.gt.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "gt:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.gte.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "gte:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.is_not_distinct_from.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "is_not_distinct_from:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.is_not_null.any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "is_not_null:any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.is_null.any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "is_null:any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.lt.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "lt:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.lte.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "lte:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.comparison.not_equal.any_any",
+      "urn": "extension:io.substrait:functions_comparison",
+      "signature": "not_equal:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.datetime.extract.req_date",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "extract:req_date",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.datetime.extract.req_pts",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "extract:req_pts",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.datetime.extract.req_ptstz",
+      "urn": "extension:io.substrait:functions_datetime",
+      "signature": "extract:req_ptstz",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.rounding.round.fp32_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:fp32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding.round.fp64_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:fp64_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding.round.i16_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:i16_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding.round.i32_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding.round.i64_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:i64_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding.round.i8_i32",
+      "urn": "extension:io.substrait:functions_rounding",
+      "signature": "round:i8_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.rounding_decimal.round.dec_i32",
+      "urn": "extension:io.substrait:functions_rounding_decimal",
+      "signature": "round:dec_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "rounding": [
+          "AWAY_FROM_ZERO",
+          "CEILING",
+          "FLOOR",
+          "TIE_AWAY_FROM_ZERO",
+          "TIE_DOWN",
+          "TIE_TOWARDS_ZERO",
+          "TIE_TO_EVEN",
+          "TIE_TO_ODD",
+          "TIE_UP",
+          "TRUNCATE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.spark.add.date_i32",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "add:date_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "date"
+          },
+          {
+            "kind": "VALUE",
+            "type": "i32"
+          }
+        ],
+        "output": {
+          "op": "CONCRETE",
+          "type": "date"
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.decimal_divide.dec_dec_dec_req",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "decimal_divide:dec_dec_dec_req",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "decimal<P1,S1>"
+          },
+          {
+            "kind": "VALUE",
+            "type": "decimal<P2,S2>"
+          },
+          {
+            "kind": "TYPE",
+            "type": "decimal<P,S>"
+          },
+          {
+            "kind": "ENUM",
+            "values": [
+              "RETURN_NULL",
+              "THROW_EXCEPTION"
+            ]
+          }
+        ],
+        "output": {
+          "op": "TYPE_ARGUMENT",
+          "index": 2
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.like_escape.str_str_str",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "like_escape:str_str_str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "string"
+          },
+          {
+            "kind": "VALUE",
+            "type": "string"
+          },
+          {
+            "kind": "VALUE",
+            "type": "string"
+          }
+        ],
+        "output": {
+          "op": "CONCRETE",
+          "type": "boolean"
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.raise_error.str",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "raise_error:str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "string"
+          }
+        ],
+        "output": {
+          "op": "CONCRETE",
+          "type": "any?"
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.trunc.dec",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "trunc:dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "decimal<P,S>"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "scalar.string.concat.str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "concat:str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "null_handling": [
+          "ACCEPT_NULLS",
+          "IGNORE_NULLS"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.contains.str_str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "contains:str_str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "case_sensitivity": [
+          "CASE_INSENSITIVE",
+          "CASE_INSENSITIVE_ASCII",
+          "CASE_SENSITIVE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.ends_with.str_str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "ends_with:str_str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "case_sensitivity": [
+          "CASE_INSENSITIVE",
+          "CASE_INSENSITIVE_ASCII",
+          "CASE_SENSITIVE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.like.str_str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "like:str_str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "case_sensitivity": [
+          "CASE_INSENSITIVE",
+          "CASE_INSENSITIVE_ASCII",
+          "CASE_SENSITIVE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.starts_with.str_str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "starts_with:str_str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "case_sensitivity": [
+          "CASE_INSENSITIVE",
+          "CASE_INSENSITIVE_ASCII",
+          "CASE_SENSITIVE"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.substring.str_i32_i32",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "substring:str_i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "negative_start": [
+          "ERROR",
+          "LEFT_OF_BEGINNING",
+          "WRAP_FROM_END"
+        ]
+      }
+    },
+    {
+      "id": "scalar.string.upper.str",
+      "urn": "extension:io.substrait:functions_string",
+      "signature": "upper:str",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "char_set": [
+          "ASCII_ONLY",
+          "UTF8"
+        ]
+      }
+    },
+    {
+      "id": "window.arithmetic.cume_dist.none",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "cume_dist:",
+      "kind": "WINDOW",
+      "callSites": [
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "window.arithmetic.dense_rank.none",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "dense_rank:",
+      "kind": "WINDOW",
+      "callSites": [
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "window.arithmetic.percent_rank.none",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "percent_rank:",
+      "kind": "WINDOW",
+      "callSites": [
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "window.arithmetic.rank.none",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "rank:",
+      "kind": "WINDOW",
+      "callSites": [
+        "WINDOW"
+      ],
+      "options": {}
+    },
+    {
+      "id": "window.arithmetic.row_number.none",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "row_number:",
+      "kind": "WINDOW",
+      "callSites": [
+        "WINDOW"
+      ],
+      "options": {}
+    }
+  ]
+}

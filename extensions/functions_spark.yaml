@@ -1,0 +1,122 @@
+%YAML 1.2
+---
+# Canonical contract: https://github.com/zz-jason/substrait-spark-extensions
+urn: extension:io.github.zz-jason:functions_spark
+scalar_functions:
+  - name: decimal_divide
+    description: >-
+      Divides two decimals using Spark SQL decimal precision, scale, HALF_UP rounding, overflow,
+      and divide-by-zero behavior. result_type declares the exact output decimal. failure_behavior
+      is RETURN_NULL or THROW_EXCEPTION.
+    impls:
+      - args:
+          - name: left
+            value: decimal<P1,S1>
+          - name: right
+            value: decimal<P2,S2>
+          - name: result_type
+            type: decimal<P,S>
+          - name: failure_behavior
+            options: [RETURN_NULL, THROW_EXCEPTION]
+        nullability: DECLARED_OUTPUT
+        return: decimal?<P,S>
+  - name: add
+    description: Adds a signed number of days to a date using Spark SQL DateAdd semantics.
+    impls:
+      - args:
+          - name: date
+            value: date
+          - name: days
+            value: i32
+        return: date
+  - name: raise_error
+    description: Raises the supplied Spark SQL runtime error instead of returning a value.
+    impls:
+      - args:
+          - name: message
+            value: string
+        nullability: DECLARED_OUTPUT
+        return: any?
+  - name: trunc
+    description: Truncates a decimal toward zero while retaining its declared decimal type.
+    impls:
+      - args:
+          - name: value
+            value: decimal<P,S>
+        nullability: DECLARED_OUTPUT
+        return: decimal?<P,S>
+  - name: like_escape
+    description: Applies Spark SQL LIKE matching with an explicit one-character escape string.
+    impls:
+      - args:
+          - name: input
+            value: string
+          - name: pattern
+            value: string
+          - name: escape
+            value: string
+        return: boolean
+aggregate_functions:
+  - name: stddev_samp
+    description: >-
+      Computes Spark SQL sample standard deviation with mergeable floating-point state and null
+      for fewer than two non-null inputs.
+    impls:
+      - args:
+          - name: value
+            value: fp64
+        nullability: DECLARED_OUTPUT
+        decomposable: MANY
+        intermediate: STRUCT<fp64,fp64,fp64>
+        return: fp64?
+  - name: sum
+    description: Computes Spark SQL decimal sum with precision widened by ten digits.
+    impls:
+      - args:
+          - name: value
+            value: decimal<P,S>
+        options:
+          overflow:
+            values: [SILENT, SATURATE, ERROR]
+        nullability: DECLARED_OUTPUT
+        decomposable: MANY
+        intermediate: DECIMAL?<38,S>
+        return: |-
+          precision = min(38, P + 10)
+          DECIMAL?<precision, S>
+  - name: avg
+    description: Computes Spark SQL decimal average with bounded precision and scale widening.
+    impls:
+      - args:
+          - name: value
+            value: decimal<P,S>
+        options:
+          overflow:
+            values: [SILENT, SATURATE, ERROR]
+        nullability: DECLARED_OUTPUT
+        decomposable: MANY
+        intermediate: STRUCT<DECIMAL<38,S>,i64>
+        return: |-
+          precision = min(38, P + 4)
+          scale = min(38, S + 4)
+          DECIMAL?<precision, scale>
+  - name: min
+    description: Computes Spark SQL minimum for values without a standard Substrait aggregate.
+    impls:
+      - args:
+          - name: value
+            value: any1
+        nullability: DECLARED_OUTPUT
+        decomposable: MANY
+        intermediate: any1?
+        return: any1?
+  - name: max
+    description: Computes Spark SQL maximum for values without a standard Substrait aggregate.
+    impls:
+      - args:
+          - name: value
+            value: any1
+        nullability: DECLARED_OUTPUT
+        decomposable: MANY
+        intermediate: any1?
+        return: any1?
