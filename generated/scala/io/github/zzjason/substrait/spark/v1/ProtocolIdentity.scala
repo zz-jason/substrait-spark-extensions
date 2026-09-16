@@ -3,12 +3,12 @@
 package io.github.zzjason.substrait.spark.v1
 
 object ProtocolIdentity {
-  final val Version = "1.0.0"
+  final val Version = "1.1.0"
   final val Major = 1
-  final val Minor = 0
+  final val Minor = 1
   final val Patch = 0
   final val SubstraitVersion = "0.98.0"
-  final val CanonicalSha256 = "98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1"
+  final val CanonicalSha256 = "68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6"
   final val FunctionExtensionUrn = "extension:io.github.zz-jason:functions_spark"
   final val PlanSemanticsTypeUrl = "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics"
   final val SparkReadSemanticsTypeUrl = "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics"

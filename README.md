@@ -2,7 +2,7 @@
 
 This repository is the implementation-neutral canonical protocol for Spark SQL plans exchanged through Substrait. It defines the contract that any producer or consumer can implement, including engines such as ClickHouse, DataFusion, Velox, and future runtimes.
 
-Protocol version `1.0.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
+Protocol version `1.1.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
 
 ## Contents
 
@@ -17,21 +17,21 @@ Protocol version `1.0.0` removes implementation capability snapshots from the ca
 - `tools/build_artifact.py`: reproducible ZIP-compatible JAR builder.
 - `tests/test_protocol.py`: contract, generation, protobuf, neutrality, and reproducibility tests.
 
-The contract contains 125 exact function identities. Ten use `extension:io.github.zz-jason:functions_spark`; the remaining identities use official Substrait 0.98 extension URNs. Function identity is the exact tuple `(kind, URN, compound signature)`. Bare names and inferred URNs are outside the protocol.
+The contract contains 132 exact function identities. Thirteen use `extension:io.github.zz-jason:functions_spark`; the remaining identities use official Substrait 0.98 extension URNs. Function identity is the exact tuple `(kind, URN, compound signature)`. Bare names and inferred URNs are outside the protocol.
 
 Function options list the values that can appear in a conforming Spark SQL protocol plan. Every consumer publishes its own support matrix and must reject an unsupported identity or option before binding or execution.
 
 ## Protocol identity
 
-- Protocol version: `1.0.0`
+- Protocol version: `1.1.0`
 - Substrait version: `0.98.0`
 - Custom function URN: `extension:io.github.zz-jason:functions_spark`
-- Canonical SHA-256: `98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1`
-- Function extension SHA-256: `9d9f0d2d4585f2e2166b76293dcfd3e1cdb1ce1483a122ff4a931221be92c9a1`
+- Canonical SHA-256: `68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6`
+- Function extension SHA-256: `608426020465c47c086190af6ae9f9297067d165134b7c8635ea381bc940cb27`
 
 The canonical contract digest is SHA-256 over UTF-8 JSON serialized with sorted keys and compact separators after removing `protocol.canonicalSha256`. The contract uses only closed structured output operations and contains no executable expressions.
 
-Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `1.0.0` and the canonical digest. Its type URL is:
+Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `1.1.0` and the canonical digest. Its type URL is:
 
 ```text
 type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics

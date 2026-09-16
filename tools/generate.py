@@ -154,8 +154,8 @@ def validate_contract(contract: Dict[str, Any]) -> None:
         "canonicalSha256", "canonicalization",
     }
     require_keys(protocol, protocol_keys, protocol_keys, "protocol")
-    if protocol["version"] != "1.0.0" or not SEMVER_RE.fullmatch(protocol["version"]):
-        raise ContractError("protocol version must be 1.0.0")
+    if protocol["version"] != "1.1.0" or not SEMVER_RE.fullmatch(protocol["version"]):
+        raise ContractError("protocol version must be 1.1.0")
     if protocol["substraitVersion"] != "0.98.0":
         raise ContractError("Substrait version must be 0.98.0")
     if protocol["protoPackage"] != "io.github.zzjason.substrait.spark.v1":
@@ -210,11 +210,11 @@ def validate_contract(contract: Dict[str, Any]) -> None:
         raise ContractError("function ids must be sorted and unique")
     if len(set(identities)) != len(identities):
         raise ContractError("function identities must be unique")
-    if len(functions) != 125:
-        raise ContractError(f"expected the current 125-function profile, found {len(functions)}")
+    if len(functions) != 132:
+        raise ContractError(f"expected the current 132-function profile, found {len(functions)}")
     custom = [function for function in functions if function["urn"] == protocol["functionExtensionUrn"]]
-    if len(custom) != 10 or not all("customDefinition" in function for function in custom):
-        raise ContractError("expected all ten custom Spark SQL extension definitions")
+    if len(custom) != 13 or not all("customDefinition" in function for function in custom):
+        raise ContractError("expected all thirteen custom Spark SQL extension definitions")
     actual_yaml_sha = hashlib.sha256(YAML_PATH.read_bytes()).hexdigest()
     if actual_yaml_sha != protocol["functionExtensionSha256"]:
         raise ContractError("functions_spark.yaml differs from its canonical protocol digest")

@@ -3,15 +3,15 @@
   "schemaVersion": 1,
   "protocol": {
     "id": "io.github.zzjason.substrait-spark-extensions",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "substraitVersion": "0.98.0",
     "protoPackage": "io.github.zzjason.substrait.spark.v1",
     "planSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics",
     "sparkReadSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics",
     "functionExtensionUrn": "extension:io.github.zz-jason:functions_spark",
-    "canonicalSha256": "98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1",
+    "canonicalSha256": "68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6",
     "canonicalization": "UTF-8 JSON with sorted keys and compact separators after removing protocol.canonicalSha256",
-    "functionExtensionSha256": "9d9f0d2d4585f2e2166b76293dcfd3e1cdb1ce1483a122ff4a931221be92c9a1"
+    "functionExtensionSha256": "608426020465c47c086190af6ae9f9297067d165134b7c8635ea381bc940cb27"
   },
   "functions": [
     {
@@ -1088,6 +1088,82 @@
       }
     },
     {
+      "id": "scalar.arithmetic.modulus.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "on_division_by_zero": [
+          "ERROR",
+          "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ]
+      }
+    },
+    {
       "id": "scalar.arithmetic.multiply.fp32_fp32",
       "urn": "extension:io.substrait:functions_arithmetic",
       "signature": "multiply:fp32_fp32",
@@ -1845,6 +1921,87 @@
           {
             "kind": "VALUE",
             "type": "decimal<P,S>"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.try_add.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_add:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          },
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.try_multiply.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_multiply:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          },
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          }
+        ],
+        "output": {
+          "op": "SAME_AS_ARGUMENT",
+          "index": 0,
+          "nullable": true
+        }
+      }
+    },
+    {
+      "id": "scalar.spark.try_subtract.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_subtract:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          },
+          {
+            "kind": "VALUE",
+            "type": "any1"
           }
         ],
         "output": {

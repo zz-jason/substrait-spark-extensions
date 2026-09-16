@@ -34,9 +34,9 @@ class ContractTest(unittest.TestCase):
 
     def test_contract_validates_and_has_canonical_identity(self):
         generate.validate_contract(self.contract)
-        self.assertEqual("1.0.0", self.contract["protocol"]["version"])
+        self.assertEqual("1.1.0", self.contract["protocol"]["version"])
         self.assertEqual(
-            "98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1",
+            "68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6",
             self.contract["protocol"]["canonicalSha256"],
         )
         self.assertEqual(
@@ -47,14 +47,14 @@ class ContractTest(unittest.TestCase):
     def test_contract_is_implementation_neutral(self):
         self.assertNotIn("capabilityProfiles", self.contract)
         self.assertNotIn("sourceSnapshots", self.contract)
-        self.assertEqual(125, len(self.contract["functions"]))
+        self.assertEqual(132, len(self.contract["functions"]))
         self.assertEqual(
-            Counter({"SCALAR": 78, "AGGREGATE": 42, "WINDOW": 5}),
+            Counter({"SCALAR": 85, "AGGREGATE": 42, "WINDOW": 5}),
             Counter(function["kind"] for function in self.contract["functions"]),
         )
         urn_counts = Counter(function["urn"] for function in self.contract["functions"])
-        self.assertEqual(67, urn_counts["extension:io.substrait:functions_arithmetic"])
-        self.assertEqual(10, urn_counts["extension:io.github.zz-jason:functions_spark"])
+        self.assertEqual(71, urn_counts["extension:io.substrait:functions_arithmetic"])
+        self.assertEqual(13, urn_counts["extension:io.github.zz-jason:functions_spark"])
 
     def test_custom_function_identities_are_exact(self):
         custom_urn = self.contract["protocol"]["functionExtensionUrn"]
@@ -69,6 +69,9 @@ class ContractTest(unittest.TestCase):
             ("SCALAR", "raise_error:str"),
             ("SCALAR", "trunc:dec"),
             ("SCALAR", "like_escape:str_str_str"),
+            ("SCALAR", "try_add:any_any"),
+            ("SCALAR", "try_multiply:any_any"),
+            ("SCALAR", "try_subtract:any_any"),
             ("AGGREGATE", "stddev_samp:fp64"),
             ("AGGREGATE", "sum:dec"),
             ("AGGREGATE", "avg:dec"),

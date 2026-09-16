@@ -3,7 +3,7 @@
 #include "substrait_spark/function_catalog.hpp"
 
 namespace io::github::zzjason::substrait::spark::v1 {
-const std::array<FunctionDescriptor, 125> kFunctionCatalog = {{
+const std::array<FunctionDescriptor, 132> kFunctionCatalog = {{
     {"aggregate.aggregate_generic.any_value.any", "extension:io.substrait:functions_aggregate_generic", "any_value:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"ignore_nulls\":[\"FALSE\",\"TRUE\"]}"},
     {"aggregate.aggregate_generic.count.any", "extension:io.substrait:functions_aggregate_generic", "count:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"aggregate.aggregate_generic.count.none", "extension:io.substrait:functions_aggregate_generic", "count:", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
@@ -68,6 +68,10 @@ const std::array<FunctionDescriptor, 125> kFunctionCatalog = {{
     {"scalar.arithmetic.divide.i32_i32", "extension:io.substrait:functions_arithmetic", "divide:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"scalar.arithmetic.divide.i64_i64", "extension:io.substrait:functions_arithmetic", "divide:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"scalar.arithmetic.divide.i8_i8", "extension:io.substrait:functions_arithmetic", "divide:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
+    {"scalar.arithmetic.modulus.i16_i16", "extension:io.substrait:functions_arithmetic", "modulus:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
+    {"scalar.arithmetic.modulus.i32_i32", "extension:io.substrait:functions_arithmetic", "modulus:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
+    {"scalar.arithmetic.modulus.i64_i64", "extension:io.substrait:functions_arithmetic", "modulus:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
+    {"scalar.arithmetic.modulus.i8_i8", "extension:io.substrait:functions_arithmetic", "modulus:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
     {"scalar.arithmetic.multiply.fp32_fp32", "extension:io.substrait:functions_arithmetic", "multiply:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
     {"scalar.arithmetic.multiply.fp64_fp64", "extension:io.substrait:functions_arithmetic", "multiply:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
     {"scalar.arithmetic.multiply.i16_i16", "extension:io.substrait:functions_arithmetic", "multiply:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
@@ -117,6 +121,9 @@ const std::array<FunctionDescriptor, 125> kFunctionCatalog = {{
     {"scalar.spark.like_escape.str_str_str", "extension:io.github.zz-jason:functions_spark", "like_escape:str_str_str", FunctionKind::kScalar, "SCALAR", "{}"},
     {"scalar.spark.raise_error.str", "extension:io.github.zz-jason:functions_spark", "raise_error:str", FunctionKind::kScalar, "SCALAR", "{}"},
     {"scalar.spark.trunc.dec", "extension:io.github.zz-jason:functions_spark", "trunc:dec", FunctionKind::kScalar, "SCALAR", "{}"},
+    {"scalar.spark.try_add.any_any", "extension:io.github.zz-jason:functions_spark", "try_add:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
+    {"scalar.spark.try_multiply.any_any", "extension:io.github.zz-jason:functions_spark", "try_multiply:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
+    {"scalar.spark.try_subtract.any_any", "extension:io.github.zz-jason:functions_spark", "try_subtract:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
     {"scalar.string.concat.str", "extension:io.substrait:functions_string", "concat:str", FunctionKind::kScalar, "SCALAR", "{\"null_handling\":[\"ACCEPT_NULLS\",\"IGNORE_NULLS\"]}"},
     {"scalar.string.contains.str_str", "extension:io.substrait:functions_string", "contains:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
     {"scalar.string.ends_with.str_str", "extension:io.substrait:functions_string", "ends_with:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
