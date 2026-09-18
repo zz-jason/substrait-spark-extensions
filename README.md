@@ -2,7 +2,7 @@
 
 This repository is the implementation-neutral canonical protocol for Spark SQL plans exchanged through Substrait. It defines the contract that any producer or consumer can implement, including engines such as ClickHouse, DataFusion, Velox, and future runtimes.
 
-Protocol version `2.0.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
+Protocol version `0.1.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
 
 ## Contents
 
@@ -22,7 +22,7 @@ Function options list the values that can appear in a conforming Spark SQL proto
 
 ## Protocol identity
 
-- Protocol version: `2.0.0`
+- Protocol version: `0.1.0`
 - Substrait version: `0.98.0`
 - Custom function URN: `extension:io.github.zz-jason:functions_spark`
 - Canonical SHA-256: `ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940`
@@ -32,7 +32,7 @@ The canonical contract digest is SHA-256 over UTF-8 JSON serialized with sorted 
 
 `Any.value` for both type URLs is a serialized `google.protobuf.Struct`. `protocol/contract.json` under `payloads` is the only definition of each payload's fields, nesting, and enum values, and it is generated into both the Scala and the C++ payload schemas. A payload with an unknown or missing field is invalid.
 
-Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `2.0.0` and the canonical digest. Its type URL is:
+Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `0.1.0` and the canonical digest. Its type URL is:
 
 ```text
 type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics

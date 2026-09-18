@@ -234,8 +234,8 @@ def validate_contract(contract: Dict[str, Any]) -> None:
         "canonicalSha256", "canonicalization",
     }
     require_keys(protocol, protocol_keys, protocol_keys, "protocol")
-    if protocol["version"] != "2.0.0" or not SEMVER_RE.fullmatch(protocol["version"]):
-        raise ContractError("protocol version must be 2.0.0")
+    if protocol["version"] != "0.1.0" or not SEMVER_RE.fullmatch(protocol["version"]):
+        raise ContractError("protocol version must be 0.1.0")
     if protocol["substraitVersion"] != "0.98.0":
         raise ContractError("Substrait version must be 0.98.0")
     if protocol["protoPackage"] != "io.github.zzjason.substrait.spark.v1":

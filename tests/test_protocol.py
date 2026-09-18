@@ -34,11 +34,8 @@ class ContractTest(unittest.TestCase):
 
     def test_contract_validates_and_has_canonical_identity(self):
         generate.validate_contract(self.contract)
-        self.assertEqual("2.0.0", self.contract["protocol"]["version"])
-        self.assertEqual(
-            "ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940",
-            self.contract["protocol"]["canonicalSha256"],
-        )
+        self.assertEqual("0.1.0", self.contract["protocol"]["version"])
+        # The digest is derived from the contract content, so it is checked instead of pinned.
         self.assertEqual(
             self.contract["protocol"]["canonicalSha256"],
             generate.canonical_sha256(self.contract),

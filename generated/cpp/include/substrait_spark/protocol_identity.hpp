@@ -6,13 +6,13 @@
 #include <string_view>
 
 namespace io::github::zzjason::substrait::spark::v1 {
-inline constexpr std::string_view kProtocolVersion = "2.0.0";
-inline constexpr std::uint32_t kProtocolMajor = 2;
-inline constexpr std::uint32_t kProtocolMinor = 0;
+inline constexpr std::string_view kProtocolVersion = "0.1.0";
+inline constexpr std::uint32_t kProtocolMajor = 0;
+inline constexpr std::uint32_t kProtocolMinor = 1;
 inline constexpr std::uint32_t kProtocolPatch = 0;
 inline constexpr std::string_view kSubstraitVersion = "0.98.0";
-inline constexpr std::string_view kCanonicalSha256Hex = "ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940";
-inline constexpr std::array<std::uint8_t, 32> kCanonicalSha256 = {0xec, 0x34, 0x9b, 0x61, 0x20, 0x50, 0x80, 0xc9, 0x9a, 0xd0, 0xa8, 0xcb, 0x3b, 0x0e, 0x33, 0x89, 0xa7, 0x7f, 0x6e, 0xbd, 0x5f, 0x2b, 0xd4, 0x7d, 0x3f, 0x47, 0x98, 0x29, 0xa3, 0xd4, 0x49, 0x40};
+inline constexpr std::string_view kCanonicalSha256Hex = "5bb708ae2643f963e9a52812ab2e7aaea7aa17353f9afdf8afba78c6d764b165";
+inline constexpr std::array<std::uint8_t, 32> kCanonicalSha256 = {0x5b, 0xb7, 0x08, 0xae, 0x26, 0x43, 0xf9, 0x63, 0xe9, 0xa5, 0x28, 0x12, 0xab, 0x2e, 0x7a, 0xae, 0xa7, 0xaa, 0x17, 0x35, 0x3f, 0x9a, 0xfd, 0xf8, 0xaf, 0xba, 0x78, 0xc6, 0xd7, 0x64, 0xb1, 0x65};
 inline constexpr std::string_view kFunctionExtensionUrn = "extension:io.github.zz-jason:functions_spark";
 inline constexpr std::string_view kPlanSemanticsTypeUrl = "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics";
 inline constexpr std::string_view kSparkReadSemanticsTypeUrl = "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics";
