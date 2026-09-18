@@ -1,17 +1,17 @@
 {
   "$schema": "contract.schema.json",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "protocol": {
     "id": "io.github.zzjason.substrait-spark-extensions",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "substraitVersion": "0.98.0",
     "protoPackage": "io.github.zzjason.substrait.spark.v1",
     "planSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics",
     "sparkReadSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics",
     "functionExtensionUrn": "extension:io.github.zz-jason:functions_spark",
-    "canonicalSha256": "68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6",
+    "canonicalSha256": "ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940",
     "canonicalization": "UTF-8 JSON with sorted keys and compact separators after removing protocol.canonicalSha256",
-    "functionExtensionSha256": "608426020465c47c086190af6ae9f9297067d165134b7c8635ea381bc940cb27"
+    "functionExtensionSha256": "db4fb05f290ba6652742cea4f3c95c022c3f155858e37076c0cd85bcfdda480e"
   },
   "functions": [
     {
@@ -588,6 +588,28 @@
       }
     },
     {
+      "id": "aggregate.spark.grouping.any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "grouping:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE"
+      ],
+      "options": {},
+      "customDefinition": {
+        "arguments": [
+          {
+            "kind": "VALUE",
+            "type": "any1"
+          }
+        ],
+        "output": {
+          "op": "CONCRETE",
+          "type": "i32"
+        }
+      }
+    },
+    {
       "id": "aggregate.spark.max.any",
       "urn": "extension:io.github.zz-jason:functions_spark",
       "signature": "max:any",
@@ -1096,13 +1118,18 @@
         "SCALAR"
       ],
       "options": {
-        "on_division_by_zero": [
-          "ERROR",
-          "NULL"
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
         ],
         "on_domain_error": [
           "ERROR",
           "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
         ]
       }
     },
@@ -1115,13 +1142,18 @@
         "SCALAR"
       ],
       "options": {
-        "on_division_by_zero": [
-          "ERROR",
-          "NULL"
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
         ],
         "on_domain_error": [
           "ERROR",
           "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
         ]
       }
     },
@@ -1134,13 +1166,18 @@
         "SCALAR"
       ],
       "options": {
-        "on_division_by_zero": [
-          "ERROR",
-          "NULL"
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
         ],
         "on_domain_error": [
           "ERROR",
           "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
         ]
       }
     },
@@ -1153,13 +1190,18 @@
         "SCALAR"
       ],
       "options": {
-        "on_division_by_zero": [
-          "ERROR",
-          "NULL"
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
         ],
         "on_domain_error": [
           "ERROR",
           "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
         ]
       }
     },
@@ -2171,5 +2213,117 @@
       ],
       "options": {}
     }
-  ]
+  ],
+  "payloads": {
+    "planSemantics": {
+      "encoding": "google.protobuf.Struct",
+      "typeUrlField": "planSemanticsTypeUrl",
+      "fields": [
+        {
+          "name": "canonical_sha256",
+          "kind": "STRING"
+        },
+        {
+          "name": "protocol_version",
+          "kind": "STRING"
+        },
+        {
+          "name": "substrait_version",
+          "kind": "STRING"
+        }
+      ]
+    },
+    "sparkReadSemantics": {
+      "encoding": "google.protobuf.Struct",
+      "typeUrlField": "sparkReadSemanticsTypeUrl",
+      "version": 1,
+      "rebaseModes": [
+        "CORRECTED"
+      ],
+      "sparkTypeNames": [
+        "BIGINT",
+        "BOOLEAN",
+        "DATE",
+        "DOUBLE",
+        "FLOAT",
+        "INT",
+        "SMALLINT",
+        "STRING",
+        "TIMESTAMP",
+        "TIMESTAMP_NTZ",
+        "TINYINT"
+      ],
+      "sparkTypePattern": "^DECIMAL\\([0-9]+,[0-9]+\\)$",
+      "fields": [
+        {
+          "name": "calendar_rebase",
+          "kind": "STRUCT",
+          "fields": [
+            {
+              "name": "parquet_datetime_read",
+              "kind": "STRING"
+            },
+            {
+              "name": "parquet_int96_read",
+              "kind": "STRING"
+            }
+          ]
+        },
+        {
+          "name": "partition_columns",
+          "kind": "LIST",
+          "element": {
+            "kind": "STRUCT",
+            "fields": [
+              {
+                "name": "name",
+                "kind": "STRING"
+              },
+              {
+                "name": "spark_type",
+                "kind": "STRING"
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_version",
+          "kind": "NUMBER"
+        },
+        {
+          "name": "session_timezone",
+          "kind": "STRING"
+        },
+        {
+          "name": "timestamp_fields",
+          "kind": "LIST",
+          "element": {
+            "kind": "STRUCT",
+            "fields": [
+              {
+                "name": "field_path",
+                "kind": "STRING"
+              },
+              {
+                "name": "physical_semantics",
+                "kind": "ENUM",
+                "values": [
+                  "LOCAL_DATETIME",
+                  "UTC_INSTANT"
+                ]
+              },
+              {
+                "name": "spark_type",
+                "kind": "ENUM",
+                "values": [
+                  "LTZ",
+                  "NTZ"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
 }

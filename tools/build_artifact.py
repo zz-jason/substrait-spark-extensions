@@ -29,7 +29,6 @@ def payload_paths() -> List[Path]:
         ROOT / "VERSION",
         ROOT / "protocol" / "contract.json",
         ROOT / "protocol" / "contract.schema.json",
-        ROOT / "proto" / "substrait_spark_extensions.proto",
         ROOT / "extensions" / "functions_spark.yaml",
         ROOT / "capabilities" / "capabilities.json",
     ]

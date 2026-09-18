@@ -87,6 +87,17 @@ scalar_functions:
             value: string
         return: boolean
 aggregate_functions:
+  - name: grouping
+    description: >-
+      Reports which grouping set a row was produced from, using Spark SQL grouping()
+      positional semantics on the referenced grouping columns. The consumer lowers it
+      from the AggregateRel grouping sets and does not read aggregate state.
+    impls:
+      - args:
+          - name: group
+            value: any1
+        nullability: DECLARED_OUTPUT
+        return: i32
   - name: stddev_samp
     description: >-
       Computes Spark SQL sample standard deviation with mergeable floating-point state and null

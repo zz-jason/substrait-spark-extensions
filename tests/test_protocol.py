@@ -34,9 +34,9 @@ class ContractTest(unittest.TestCase):
 
     def test_contract_validates_and_has_canonical_identity(self):
         generate.validate_contract(self.contract)
-        self.assertEqual("1.1.0", self.contract["protocol"]["version"])
+        self.assertEqual("2.0.0", self.contract["protocol"]["version"])
         self.assertEqual(
-            "68dd6260861b22c7354c8de7feb1d6e8d324fd4cf5f0f55b0a99cb613c07d0f6",
+            "ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940",
             self.contract["protocol"]["canonicalSha256"],
         )
         self.assertEqual(
@@ -47,14 +47,14 @@ class ContractTest(unittest.TestCase):
     def test_contract_is_implementation_neutral(self):
         self.assertNotIn("capabilityProfiles", self.contract)
         self.assertNotIn("sourceSnapshots", self.contract)
-        self.assertEqual(132, len(self.contract["functions"]))
+        self.assertEqual(133, len(self.contract["functions"]))
         self.assertEqual(
-            Counter({"SCALAR": 85, "AGGREGATE": 42, "WINDOW": 5}),
+            Counter({"SCALAR": 85, "AGGREGATE": 43, "WINDOW": 5}),
             Counter(function["kind"] for function in self.contract["functions"]),
         )
         urn_counts = Counter(function["urn"] for function in self.contract["functions"])
         self.assertEqual(71, urn_counts["extension:io.substrait:functions_arithmetic"])
-        self.assertEqual(13, urn_counts["extension:io.github.zz-jason:functions_spark"])
+        self.assertEqual(14, urn_counts["extension:io.github.zz-jason:functions_spark"])
 
     def test_custom_function_identities_are_exact(self):
         custom_urn = self.contract["protocol"]["functionExtensionUrn"]
@@ -72,6 +72,7 @@ class ContractTest(unittest.TestCase):
             ("SCALAR", "try_add:any_any"),
             ("SCALAR", "try_multiply:any_any"),
             ("SCALAR", "try_subtract:any_any"),
+            ("AGGREGATE", "grouping:any"),
             ("AGGREGATE", "stddev_samp:fp64"),
             ("AGGREGATE", "sum:dec"),
             ("AGGREGATE", "avg:dec"),
@@ -97,6 +98,51 @@ class ContractTest(unittest.TestCase):
             "extension:io.substrait:functions_arithmetic", "divide:fp64_fp64"
         )]["options"]["rounding"]
         self.assertEqual(["CEILING", "FLOOR", "TIE_AWAY_FROM_ZERO", "TIE_TO_EVEN", "TRUNCATE"], floating_divide)
+
+    def test_modulus_matches_the_upstream_arithmetic_definition(self):
+        by_identity = {
+            (function["urn"], function["signature"]): function
+            for function in self.contract["functions"]
+        }
+        for token in ("i8", "i16", "i32", "i64"):
+            modulus = by_identity[(
+                "extension:io.substrait:functions_arithmetic", f"modulus:{token}_{token}"
+            )]
+            self.assertEqual(
+                {
+                    "division_type": ["FLOOR", "TRUNCATE"],
+                    "on_domain_error": ["ERROR", "NULL"],
+                    "overflow": ["ERROR", "SATURATE", "SILENT"],
+                },
+                modulus["options"],
+            )
+        divide = by_identity[(
+            "extension:io.substrait:functions_arithmetic", "divide:i64_i64"
+        )]
+        self.assertEqual(["ERROR", "SATURATE", "SILENT"], divide["options"]["overflow"])
+        self.assertIn("on_division_by_zero", divide["options"])
+        self.assertNotIn("on_division_by_zero", by_identity[(
+            "extension:io.substrait:functions_arithmetic", "modulus:i64_i64"
+        )]["options"])
+
+    def test_payload_schema_is_the_single_wire_definition(self):
+        payloads = self.contract["payloads"]
+        self.assertEqual({"planSemantics", "sparkReadSemantics"}, set(payloads))
+        for name, payload in payloads.items():
+            self.assertEqual("google.protobuf.Struct", payload["encoding"])
+            self.assertEqual(
+                self.contract["protocol"][payload["typeUrlField"]],
+                "type.googleapis.com/"
+                + self.contract["protocol"]["protoPackage"]
+                + ("." + ("PlanSemantics" if name == "planSemantics" else "SparkReadSemantics")),
+            )
+        read = payloads["sparkReadSemantics"]
+        fields = {field["name"] for field in read["fields"]}
+        self.assertEqual(
+            {"calendar_rebase", "partition_columns", "protocol_version", "session_timezone", "timestamp_fields"},
+            fields,
+        )
+        self.assertEqual(["CORRECTED"], read["rebaseModes"])
 
     def test_contract_uses_only_closed_structured_formulas(self):
         allowed_output = set(generate.OUTPUT_OPS)
@@ -163,16 +209,8 @@ class ContractTest(unittest.TestCase):
 
 
 class ProtoTest(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.proto = (ROOT / "proto" / "substrait_spark_extensions.proto").read_text(encoding="utf-8")
-
-    def test_proto_package_and_messages_are_stable(self):
-        self.assertIn("package io.github.zzjason.substrait.spark.v1;", self.proto)
-        self.assertIn("message PlanSemantics {", self.proto)
-        self.assertIn("message SparkReadSemantics {", self.proto)
-        self.assertIn("bytes canonical_sha256 = 4;", self.proto)
-        self.assertIn("repeated TimestampField timestamp_fields = 6;", self.proto)
+    def test_there_is_no_second_wire_schema_definition(self):
+        self.assertFalse((ROOT / "proto").exists())
 
     def test_type_urls_match_proto_package(self):
         contract = generate.load_json(ROOT / "protocol" / "contract.json")

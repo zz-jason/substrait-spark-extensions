@@ -14,6 +14,6 @@ struct FunctionDescriptor {
   std::string_view call_sites_csv;
   std::string_view options_json;
 };
-extern const std::array<FunctionDescriptor, 132> kFunctionCatalog;
+extern const std::array<FunctionDescriptor, 133> kFunctionCatalog;
 const FunctionDescriptor *FindFunction(FunctionKind kind, std::string_view urn, std::string_view signature);
 }  // namespace io::github::zzjason::substrait::spark::v1

@@ -3,7 +3,7 @@
 #include "substrait_spark/function_catalog.hpp"
 
 namespace io::github::zzjason::substrait::spark::v1 {
-const std::array<FunctionDescriptor, 132> kFunctionCatalog = {{
+const std::array<FunctionDescriptor, 133> kFunctionCatalog = {{
     {"aggregate.aggregate_generic.any_value.any", "extension:io.substrait:functions_aggregate_generic", "any_value:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"ignore_nulls\":[\"FALSE\",\"TRUE\"]}"},
     {"aggregate.aggregate_generic.count.any", "extension:io.substrait:functions_aggregate_generic", "count:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"aggregate.aggregate_generic.count.none", "extension:io.substrait:functions_aggregate_generic", "count:", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
@@ -42,6 +42,7 @@ const std::array<FunctionDescriptor, 132> kFunctionCatalog = {{
     {"aggregate.datetime.min.pts", "extension:io.substrait:functions_datetime", "min:pts", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
     {"aggregate.datetime.min.ptstz", "extension:io.substrait:functions_datetime", "min:ptstz", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
     {"aggregate.spark.avg.dec", "extension:io.github.zz-jason:functions_spark", "avg:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
+    {"aggregate.spark.grouping.any", "extension:io.github.zz-jason:functions_spark", "grouping:any", FunctionKind::kAggregate, "AGGREGATE", "{}"},
     {"aggregate.spark.max.any", "extension:io.github.zz-jason:functions_spark", "max:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
     {"aggregate.spark.min.any", "extension:io.github.zz-jason:functions_spark", "min:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
     {"aggregate.spark.stddev_samp.fp64", "extension:io.github.zz-jason:functions_spark", "stddev_samp:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
@@ -68,10 +69,10 @@ const std::array<FunctionDescriptor, 132> kFunctionCatalog = {{
     {"scalar.arithmetic.divide.i32_i32", "extension:io.substrait:functions_arithmetic", "divide:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"scalar.arithmetic.divide.i64_i64", "extension:io.substrait:functions_arithmetic", "divide:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"scalar.arithmetic.divide.i8_i8", "extension:io.substrait:functions_arithmetic", "divide:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.modulus.i16_i16", "extension:io.substrait:functions_arithmetic", "modulus:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
-    {"scalar.arithmetic.modulus.i32_i32", "extension:io.substrait:functions_arithmetic", "modulus:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
-    {"scalar.arithmetic.modulus.i64_i64", "extension:io.substrait:functions_arithmetic", "modulus:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
-    {"scalar.arithmetic.modulus.i8_i8", "extension:io.substrait:functions_arithmetic", "modulus:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"]}"},
+    {"scalar.arithmetic.modulus.i16_i16", "extension:io.substrait:functions_arithmetic", "modulus:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
+    {"scalar.arithmetic.modulus.i32_i32", "extension:io.substrait:functions_arithmetic", "modulus:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
+    {"scalar.arithmetic.modulus.i64_i64", "extension:io.substrait:functions_arithmetic", "modulus:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
+    {"scalar.arithmetic.modulus.i8_i8", "extension:io.substrait:functions_arithmetic", "modulus:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
     {"scalar.arithmetic.multiply.fp32_fp32", "extension:io.substrait:functions_arithmetic", "multiply:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
     {"scalar.arithmetic.multiply.fp64_fp64", "extension:io.substrait:functions_arithmetic", "multiply:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
     {"scalar.arithmetic.multiply.i16_i16", "extension:io.substrait:functions_arithmetic", "multiply:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
