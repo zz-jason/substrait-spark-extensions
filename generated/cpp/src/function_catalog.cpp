@@ -3,140 +3,211 @@
 #include "substrait_spark/function_catalog.hpp"
 
 namespace io::github::zzjason::substrait::spark::v1 {
+namespace {
+constexpr FunctionOptionDescriptor kFunctionOptions0[] = {{"ignore_nulls", "FALSE,TRUE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions1[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions2[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions3[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions4[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions5[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions6[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions7[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions8[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions21[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions22[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions23[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions24[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions25[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions26[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions27[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions30[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions37[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions42[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions45[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions46[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions47[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions48[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions49[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions50[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions51[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions52[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions53[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions54[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions59[] = {{"on_division_by_zero", "ERROR,IEEE,LIMIT,NULL"}, {"on_domain_error", "ERROR,NAN,NULL"}, {"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions60[] = {{"on_division_by_zero", "ERROR,IEEE,LIMIT,NULL"}, {"on_domain_error", "ERROR,NAN,NULL"}, {"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions61[] = {{"on_division_by_zero", "ERROR,NULL"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions62[] = {{"on_division_by_zero", "ERROR,NULL"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions63[] = {{"on_division_by_zero", "ERROR,NULL"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions64[] = {{"on_division_by_zero", "ERROR,NULL"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions65[] = {{"division_type", "FLOOR,TRUNCATE"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions66[] = {{"division_type", "FLOOR,TRUNCATE"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions67[] = {{"division_type", "FLOOR,TRUNCATE"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions68[] = {{"division_type", "FLOOR,TRUNCATE"}, {"on_domain_error", "ERROR,NULL"}, {"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions69[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions70[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions71[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions72[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions73[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions74[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions79[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions80[] = {{"rounding", "CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_TO_EVEN,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions81[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions82[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions83[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions84[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions86[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions88[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions89[] = {{"overflow", "ERROR,SATURATE,SILENT"}};
+constexpr FunctionOptionDescriptor kFunctionOptions106[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions107[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions108[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions109[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions110[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions111[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions112[] = {{"rounding", "AWAY_FROM_ZERO,CEILING,FLOOR,TIE_AWAY_FROM_ZERO,TIE_DOWN,TIE_TOWARDS_ZERO,TIE_TO_EVEN,TIE_TO_ODD,TIE_UP,TRUNCATE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions121[] = {{"null_handling", "ACCEPT_NULLS,IGNORE_NULLS"}};
+constexpr FunctionOptionDescriptor kFunctionOptions122[] = {{"case_sensitivity", "CASE_INSENSITIVE,CASE_INSENSITIVE_ASCII,CASE_SENSITIVE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions123[] = {{"case_sensitivity", "CASE_INSENSITIVE,CASE_INSENSITIVE_ASCII,CASE_SENSITIVE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions124[] = {{"case_sensitivity", "CASE_INSENSITIVE,CASE_INSENSITIVE_ASCII,CASE_SENSITIVE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions125[] = {{"case_sensitivity", "CASE_INSENSITIVE,CASE_INSENSITIVE_ASCII,CASE_SENSITIVE"}};
+constexpr FunctionOptionDescriptor kFunctionOptions126[] = {{"negative_start", "ERROR,LEFT_OF_BEGINNING,WRAP_FROM_END"}};
+constexpr FunctionOptionDescriptor kFunctionOptions127[] = {{"char_set", "ASCII_ONLY,UTF8"}};
+}  // namespace
+
 const std::array<FunctionDescriptor, 133> kFunctionCatalog = {{
-    {"aggregate.aggregate_generic.any_value.any", "extension:io.substrait:functions_aggregate_generic", "any_value:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"ignore_nulls\":[\"FALSE\",\"TRUE\"]}"},
-    {"aggregate.aggregate_generic.count.any", "extension:io.substrait:functions_aggregate_generic", "count:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.aggregate_generic.count.none", "extension:io.substrait:functions_aggregate_generic", "count:", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.fp32", "extension:io.substrait:functions_arithmetic", "avg:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.fp64", "extension:io.substrait:functions_arithmetic", "avg:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.i16", "extension:io.substrait:functions_arithmetic", "avg:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.i32", "extension:io.substrait:functions_arithmetic", "avg:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.i64", "extension:io.substrait:functions_arithmetic", "avg:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.avg.i8", "extension:io.substrait:functions_arithmetic", "avg:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.max.fp32", "extension:io.substrait:functions_arithmetic", "max:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.max.fp64", "extension:io.substrait:functions_arithmetic", "max:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.max.i16", "extension:io.substrait:functions_arithmetic", "max:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.max.i32", "extension:io.substrait:functions_arithmetic", "max:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.max.i64", "extension:io.substrait:functions_arithmetic", "max:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.max.i8", "extension:io.substrait:functions_arithmetic", "max:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.fp32", "extension:io.substrait:functions_arithmetic", "min:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.fp64", "extension:io.substrait:functions_arithmetic", "min:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.i16", "extension:io.substrait:functions_arithmetic", "min:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.i32", "extension:io.substrait:functions_arithmetic", "min:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.i64", "extension:io.substrait:functions_arithmetic", "min:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.min.i8", "extension:io.substrait:functions_arithmetic", "min:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic.sum.fp32", "extension:io.substrait:functions_arithmetic", "sum:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.sum.fp64", "extension:io.substrait:functions_arithmetic", "sum:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.sum.i16", "extension:io.substrait:functions_arithmetic", "sum:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.sum.i32", "extension:io.substrait:functions_arithmetic", "sum:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.sum.i64", "extension:io.substrait:functions_arithmetic", "sum:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic.sum.i8", "extension:io.substrait:functions_arithmetic", "sum:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic_decimal.avg.dec", "extension:io.substrait:functions_arithmetic_decimal", "avg:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.arithmetic_decimal.max.dec", "extension:io.substrait:functions_arithmetic_decimal", "max:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic_decimal.min.dec", "extension:io.substrait:functions_arithmetic_decimal", "min:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.arithmetic_decimal.sum.dec", "extension:io.substrait:functions_arithmetic_decimal", "sum:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.datetime.max.date", "extension:io.substrait:functions_datetime", "max:date", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.datetime.max.pts", "extension:io.substrait:functions_datetime", "max:pts", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.datetime.max.ptstz", "extension:io.substrait:functions_datetime", "max:ptstz", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.datetime.min.date", "extension:io.substrait:functions_datetime", "min:date", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.datetime.min.pts", "extension:io.substrait:functions_datetime", "min:pts", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.datetime.min.ptstz", "extension:io.substrait:functions_datetime", "min:ptstz", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.spark.avg.dec", "extension:io.github.zz-jason:functions_spark", "avg:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"aggregate.spark.grouping.any", "extension:io.github.zz-jason:functions_spark", "grouping:any", FunctionKind::kAggregate, "AGGREGATE", "{}"},
-    {"aggregate.spark.max.any", "extension:io.github.zz-jason:functions_spark", "max:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.spark.min.any", "extension:io.github.zz-jason:functions_spark", "min:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.spark.stddev_samp.fp64", "extension:io.github.zz-jason:functions_spark", "stddev_samp:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{}"},
-    {"aggregate.spark.sum.dec", "extension:io.github.zz-jason:functions_spark", "sum:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.abs.fp32", "extension:io.substrait:functions_arithmetic", "abs:fp32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.abs.fp64", "extension:io.substrait:functions_arithmetic", "abs:fp64", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.abs.i16", "extension:io.substrait:functions_arithmetic", "abs:i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.abs.i32", "extension:io.substrait:functions_arithmetic", "abs:i32", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.abs.i64", "extension:io.substrait:functions_arithmetic", "abs:i64", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.abs.i8", "extension:io.substrait:functions_arithmetic", "abs:i8", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.add.fp32_fp32", "extension:io.substrait:functions_arithmetic", "add:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.add.fp64_fp64", "extension:io.substrait:functions_arithmetic", "add:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.add.i16_i16", "extension:io.substrait:functions_arithmetic", "add:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.add.i32_i32", "extension:io.substrait:functions_arithmetic", "add:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.add.i64_i64", "extension:io.substrait:functions_arithmetic", "add:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.add.i8_i8", "extension:io.substrait:functions_arithmetic", "add:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.bitwise_and.i16_i16", "extension:io.substrait:functions_arithmetic", "bitwise_and:i16_i16", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.bitwise_and.i32_i32", "extension:io.substrait:functions_arithmetic", "bitwise_and:i32_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.bitwise_and.i64_i64", "extension:io.substrait:functions_arithmetic", "bitwise_and:i64_i64", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.bitwise_and.i8_i8", "extension:io.substrait:functions_arithmetic", "bitwise_and:i8_i8", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.divide.fp32_fp32", "extension:io.substrait:functions_arithmetic", "divide:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"IEEE\",\"LIMIT\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NAN\",\"NULL\"],\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.divide.fp64_fp64", "extension:io.substrait:functions_arithmetic", "divide:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"IEEE\",\"LIMIT\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NAN\",\"NULL\"],\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.divide.i16_i16", "extension:io.substrait:functions_arithmetic", "divide:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.divide.i32_i32", "extension:io.substrait:functions_arithmetic", "divide:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.divide.i64_i64", "extension:io.substrait:functions_arithmetic", "divide:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.divide.i8_i8", "extension:io.substrait:functions_arithmetic", "divide:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"on_division_by_zero\":[\"ERROR\",\"NULL\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.modulus.i16_i16", "extension:io.substrait:functions_arithmetic", "modulus:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.modulus.i32_i32", "extension:io.substrait:functions_arithmetic", "modulus:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.modulus.i64_i64", "extension:io.substrait:functions_arithmetic", "modulus:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.modulus.i8_i8", "extension:io.substrait:functions_arithmetic", "modulus:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"division_type\":[\"FLOOR\",\"TRUNCATE\"],\"on_domain_error\":[\"ERROR\",\"NULL\"],\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.multiply.fp32_fp32", "extension:io.substrait:functions_arithmetic", "multiply:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.multiply.fp64_fp64", "extension:io.substrait:functions_arithmetic", "multiply:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.multiply.i16_i16", "extension:io.substrait:functions_arithmetic", "multiply:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.multiply.i32_i32", "extension:io.substrait:functions_arithmetic", "multiply:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.multiply.i64_i64", "extension:io.substrait:functions_arithmetic", "multiply:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.multiply.i8_i8", "extension:io.substrait:functions_arithmetic", "multiply:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.shift_left.i32_i32", "extension:io.substrait:functions_arithmetic", "shift_left:i32_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.shift_left.i64_i32", "extension:io.substrait:functions_arithmetic", "shift_left:i64_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.shift_right.i32_i32", "extension:io.substrait:functions_arithmetic", "shift_right:i32_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.shift_right.i64_i32", "extension:io.substrait:functions_arithmetic", "shift_right:i64_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic.subtract.fp32_fp32", "extension:io.substrait:functions_arithmetic", "subtract:fp32_fp32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.subtract.fp64_fp64", "extension:io.substrait:functions_arithmetic", "subtract:fp64_fp64", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_TO_EVEN\",\"TRUNCATE\"]}"},
-    {"scalar.arithmetic.subtract.i16_i16", "extension:io.substrait:functions_arithmetic", "subtract:i16_i16", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.subtract.i32_i32", "extension:io.substrait:functions_arithmetic", "subtract:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.subtract.i64_i64", "extension:io.substrait:functions_arithmetic", "subtract:i64_i64", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic.subtract.i8_i8", "extension:io.substrait:functions_arithmetic", "subtract:i8_i8", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic_decimal.abs.dec", "extension:io.substrait:functions_arithmetic_decimal", "abs:dec", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic_decimal.add.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "add:dec_dec", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic_decimal.bitwise_and.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "bitwise_and:dec_dec", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.arithmetic_decimal.multiply.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "multiply:dec_dec", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.arithmetic_decimal.subtract.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "subtract:dec_dec", FunctionKind::kScalar, "SCALAR", "{\"overflow\":[\"ERROR\",\"SATURATE\",\"SILENT\"]}"},
-    {"scalar.boolean.and.bool", "extension:io.substrait:functions_boolean", "and:bool", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.boolean.not.bool", "extension:io.substrait:functions_boolean", "not:bool", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.boolean.or.bool", "extension:io.substrait:functions_boolean", "or:bool", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.coalesce.any", "extension:io.substrait:functions_comparison", "coalesce:any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.equal.any_any", "extension:io.substrait:functions_comparison", "equal:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.gt.any_any", "extension:io.substrait:functions_comparison", "gt:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.gte.any_any", "extension:io.substrait:functions_comparison", "gte:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.is_not_distinct_from.any_any", "extension:io.substrait:functions_comparison", "is_not_distinct_from:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.is_not_null.any", "extension:io.substrait:functions_comparison", "is_not_null:any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.is_null.any", "extension:io.substrait:functions_comparison", "is_null:any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.lt.any_any", "extension:io.substrait:functions_comparison", "lt:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.lte.any_any", "extension:io.substrait:functions_comparison", "lte:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.comparison.not_equal.any_any", "extension:io.substrait:functions_comparison", "not_equal:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.datetime.extract.req_date", "extension:io.substrait:functions_datetime", "extract:req_date", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.datetime.extract.req_pts", "extension:io.substrait:functions_datetime", "extract:req_pts", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.datetime.extract.req_ptstz", "extension:io.substrait:functions_datetime", "extract:req_ptstz", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.rounding.round.fp32_i32", "extension:io.substrait:functions_rounding", "round:fp32_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding.round.fp64_i32", "extension:io.substrait:functions_rounding", "round:fp64_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding.round.i16_i32", "extension:io.substrait:functions_rounding", "round:i16_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding.round.i32_i32", "extension:io.substrait:functions_rounding", "round:i32_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding.round.i64_i32", "extension:io.substrait:functions_rounding", "round:i64_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding.round.i8_i32", "extension:io.substrait:functions_rounding", "round:i8_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.rounding_decimal.round.dec_i32", "extension:io.substrait:functions_rounding_decimal", "round:dec_i32", FunctionKind::kScalar, "SCALAR", "{\"rounding\":[\"AWAY_FROM_ZERO\",\"CEILING\",\"FLOOR\",\"TIE_AWAY_FROM_ZERO\",\"TIE_DOWN\",\"TIE_TOWARDS_ZERO\",\"TIE_TO_EVEN\",\"TIE_TO_ODD\",\"TIE_UP\",\"TRUNCATE\"]}"},
-    {"scalar.spark.add.date_i32", "extension:io.github.zz-jason:functions_spark", "add:date_i32", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.decimal_divide.dec_dec_dec_req", "extension:io.github.zz-jason:functions_spark", "decimal_divide:dec_dec_dec_req", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.like_escape.str_str_str", "extension:io.github.zz-jason:functions_spark", "like_escape:str_str_str", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.raise_error.str", "extension:io.github.zz-jason:functions_spark", "raise_error:str", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.trunc.dec", "extension:io.github.zz-jason:functions_spark", "trunc:dec", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.try_add.any_any", "extension:io.github.zz-jason:functions_spark", "try_add:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.try_multiply.any_any", "extension:io.github.zz-jason:functions_spark", "try_multiply:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.spark.try_subtract.any_any", "extension:io.github.zz-jason:functions_spark", "try_subtract:any_any", FunctionKind::kScalar, "SCALAR", "{}"},
-    {"scalar.string.concat.str", "extension:io.substrait:functions_string", "concat:str", FunctionKind::kScalar, "SCALAR", "{\"null_handling\":[\"ACCEPT_NULLS\",\"IGNORE_NULLS\"]}"},
-    {"scalar.string.contains.str_str", "extension:io.substrait:functions_string", "contains:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
-    {"scalar.string.ends_with.str_str", "extension:io.substrait:functions_string", "ends_with:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
-    {"scalar.string.like.str_str", "extension:io.substrait:functions_string", "like:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
-    {"scalar.string.starts_with.str_str", "extension:io.substrait:functions_string", "starts_with:str_str", FunctionKind::kScalar, "SCALAR", "{\"case_sensitivity\":[\"CASE_INSENSITIVE\",\"CASE_INSENSITIVE_ASCII\",\"CASE_SENSITIVE\"]}"},
-    {"scalar.string.substring.str_i32_i32", "extension:io.substrait:functions_string", "substring:str_i32_i32", FunctionKind::kScalar, "SCALAR", "{\"negative_start\":[\"ERROR\",\"LEFT_OF_BEGINNING\",\"WRAP_FROM_END\"]}"},
-    {"scalar.string.upper.str", "extension:io.substrait:functions_string", "upper:str", FunctionKind::kScalar, "SCALAR", "{\"char_set\":[\"ASCII_ONLY\",\"UTF8\"]}"},
-    {"window.arithmetic.cume_dist.none", "extension:io.substrait:functions_arithmetic", "cume_dist:", FunctionKind::kWindow, "WINDOW", "{}"},
-    {"window.arithmetic.dense_rank.none", "extension:io.substrait:functions_arithmetic", "dense_rank:", FunctionKind::kWindow, "WINDOW", "{}"},
-    {"window.arithmetic.percent_rank.none", "extension:io.substrait:functions_arithmetic", "percent_rank:", FunctionKind::kWindow, "WINDOW", "{}"},
-    {"window.arithmetic.rank.none", "extension:io.substrait:functions_arithmetic", "rank:", FunctionKind::kWindow, "WINDOW", "{}"},
-    {"window.arithmetic.row_number.none", "extension:io.substrait:functions_arithmetic", "row_number:", FunctionKind::kWindow, "WINDOW", "{}"},
+    {"aggregate.aggregate_generic.any_value.any", "extension:io.substrait:functions_aggregate_generic", "any_value:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions0, 1},
+    {"aggregate.aggregate_generic.count.any", "extension:io.substrait:functions_aggregate_generic", "count:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions1, 1},
+    {"aggregate.aggregate_generic.count.none", "extension:io.substrait:functions_aggregate_generic", "count:", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions2, 1},
+    {"aggregate.arithmetic.avg.fp32", "extension:io.substrait:functions_arithmetic", "avg:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions3, 1},
+    {"aggregate.arithmetic.avg.fp64", "extension:io.substrait:functions_arithmetic", "avg:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions4, 1},
+    {"aggregate.arithmetic.avg.i16", "extension:io.substrait:functions_arithmetic", "avg:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions5, 1},
+    {"aggregate.arithmetic.avg.i32", "extension:io.substrait:functions_arithmetic", "avg:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions6, 1},
+    {"aggregate.arithmetic.avg.i64", "extension:io.substrait:functions_arithmetic", "avg:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions7, 1},
+    {"aggregate.arithmetic.avg.i8", "extension:io.substrait:functions_arithmetic", "avg:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions8, 1},
+    {"aggregate.arithmetic.max.fp32", "extension:io.substrait:functions_arithmetic", "max:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.max.fp64", "extension:io.substrait:functions_arithmetic", "max:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.max.i16", "extension:io.substrait:functions_arithmetic", "max:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.max.i32", "extension:io.substrait:functions_arithmetic", "max:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.max.i64", "extension:io.substrait:functions_arithmetic", "max:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.max.i8", "extension:io.substrait:functions_arithmetic", "max:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.fp32", "extension:io.substrait:functions_arithmetic", "min:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.fp64", "extension:io.substrait:functions_arithmetic", "min:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.i16", "extension:io.substrait:functions_arithmetic", "min:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.i32", "extension:io.substrait:functions_arithmetic", "min:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.i64", "extension:io.substrait:functions_arithmetic", "min:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.min.i8", "extension:io.substrait:functions_arithmetic", "min:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic.sum.fp32", "extension:io.substrait:functions_arithmetic", "sum:fp32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions21, 1},
+    {"aggregate.arithmetic.sum.fp64", "extension:io.substrait:functions_arithmetic", "sum:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions22, 1},
+    {"aggregate.arithmetic.sum.i16", "extension:io.substrait:functions_arithmetic", "sum:i16", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions23, 1},
+    {"aggregate.arithmetic.sum.i32", "extension:io.substrait:functions_arithmetic", "sum:i32", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions24, 1},
+    {"aggregate.arithmetic.sum.i64", "extension:io.substrait:functions_arithmetic", "sum:i64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions25, 1},
+    {"aggregate.arithmetic.sum.i8", "extension:io.substrait:functions_arithmetic", "sum:i8", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions26, 1},
+    {"aggregate.arithmetic_decimal.avg.dec", "extension:io.substrait:functions_arithmetic_decimal", "avg:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions27, 1},
+    {"aggregate.arithmetic_decimal.max.dec", "extension:io.substrait:functions_arithmetic_decimal", "max:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic_decimal.min.dec", "extension:io.substrait:functions_arithmetic_decimal", "min:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.arithmetic_decimal.sum.dec", "extension:io.substrait:functions_arithmetic_decimal", "sum:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions30, 1},
+    {"aggregate.datetime.max.date", "extension:io.substrait:functions_datetime", "max:date", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.datetime.max.pts", "extension:io.substrait:functions_datetime", "max:pts", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.datetime.max.ptstz", "extension:io.substrait:functions_datetime", "max:ptstz", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.datetime.min.date", "extension:io.substrait:functions_datetime", "min:date", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.datetime.min.pts", "extension:io.substrait:functions_datetime", "min:pts", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.datetime.min.ptstz", "extension:io.substrait:functions_datetime", "min:ptstz", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.spark.avg.dec", "extension:io.github.zz-jason:functions_spark", "avg:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions37, 1},
+    {"aggregate.spark.grouping.any", "extension:io.github.zz-jason:functions_spark", "grouping:any", FunctionKind::kAggregate, "AGGREGATE", nullptr, 0},
+    {"aggregate.spark.max.any", "extension:io.github.zz-jason:functions_spark", "max:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.spark.min.any", "extension:io.github.zz-jason:functions_spark", "min:any", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.spark.stddev_samp.fp64", "extension:io.github.zz-jason:functions_spark", "stddev_samp:fp64", FunctionKind::kAggregate, "AGGREGATE,WINDOW", nullptr, 0},
+    {"aggregate.spark.sum.dec", "extension:io.github.zz-jason:functions_spark", "sum:dec", FunctionKind::kAggregate, "AGGREGATE,WINDOW", kFunctionOptions42, 1},
+    {"scalar.arithmetic.abs.fp32", "extension:io.substrait:functions_arithmetic", "abs:fp32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.abs.fp64", "extension:io.substrait:functions_arithmetic", "abs:fp64", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.abs.i16", "extension:io.substrait:functions_arithmetic", "abs:i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions45, 1},
+    {"scalar.arithmetic.abs.i32", "extension:io.substrait:functions_arithmetic", "abs:i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions46, 1},
+    {"scalar.arithmetic.abs.i64", "extension:io.substrait:functions_arithmetic", "abs:i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions47, 1},
+    {"scalar.arithmetic.abs.i8", "extension:io.substrait:functions_arithmetic", "abs:i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions48, 1},
+    {"scalar.arithmetic.add.fp32_fp32", "extension:io.substrait:functions_arithmetic", "add:fp32_fp32", FunctionKind::kScalar, "SCALAR", kFunctionOptions49, 1},
+    {"scalar.arithmetic.add.fp64_fp64", "extension:io.substrait:functions_arithmetic", "add:fp64_fp64", FunctionKind::kScalar, "SCALAR", kFunctionOptions50, 1},
+    {"scalar.arithmetic.add.i16_i16", "extension:io.substrait:functions_arithmetic", "add:i16_i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions51, 1},
+    {"scalar.arithmetic.add.i32_i32", "extension:io.substrait:functions_arithmetic", "add:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions52, 1},
+    {"scalar.arithmetic.add.i64_i64", "extension:io.substrait:functions_arithmetic", "add:i64_i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions53, 1},
+    {"scalar.arithmetic.add.i8_i8", "extension:io.substrait:functions_arithmetic", "add:i8_i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions54, 1},
+    {"scalar.arithmetic.bitwise_and.i16_i16", "extension:io.substrait:functions_arithmetic", "bitwise_and:i16_i16", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.bitwise_and.i32_i32", "extension:io.substrait:functions_arithmetic", "bitwise_and:i32_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.bitwise_and.i64_i64", "extension:io.substrait:functions_arithmetic", "bitwise_and:i64_i64", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.bitwise_and.i8_i8", "extension:io.substrait:functions_arithmetic", "bitwise_and:i8_i8", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.divide.fp32_fp32", "extension:io.substrait:functions_arithmetic", "divide:fp32_fp32", FunctionKind::kScalar, "SCALAR", kFunctionOptions59, 3},
+    {"scalar.arithmetic.divide.fp64_fp64", "extension:io.substrait:functions_arithmetic", "divide:fp64_fp64", FunctionKind::kScalar, "SCALAR", kFunctionOptions60, 3},
+    {"scalar.arithmetic.divide.i16_i16", "extension:io.substrait:functions_arithmetic", "divide:i16_i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions61, 3},
+    {"scalar.arithmetic.divide.i32_i32", "extension:io.substrait:functions_arithmetic", "divide:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions62, 3},
+    {"scalar.arithmetic.divide.i64_i64", "extension:io.substrait:functions_arithmetic", "divide:i64_i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions63, 3},
+    {"scalar.arithmetic.divide.i8_i8", "extension:io.substrait:functions_arithmetic", "divide:i8_i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions64, 3},
+    {"scalar.arithmetic.modulus.i16_i16", "extension:io.substrait:functions_arithmetic", "modulus:i16_i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions65, 3},
+    {"scalar.arithmetic.modulus.i32_i32", "extension:io.substrait:functions_arithmetic", "modulus:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions66, 3},
+    {"scalar.arithmetic.modulus.i64_i64", "extension:io.substrait:functions_arithmetic", "modulus:i64_i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions67, 3},
+    {"scalar.arithmetic.modulus.i8_i8", "extension:io.substrait:functions_arithmetic", "modulus:i8_i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions68, 3},
+    {"scalar.arithmetic.multiply.fp32_fp32", "extension:io.substrait:functions_arithmetic", "multiply:fp32_fp32", FunctionKind::kScalar, "SCALAR", kFunctionOptions69, 1},
+    {"scalar.arithmetic.multiply.fp64_fp64", "extension:io.substrait:functions_arithmetic", "multiply:fp64_fp64", FunctionKind::kScalar, "SCALAR", kFunctionOptions70, 1},
+    {"scalar.arithmetic.multiply.i16_i16", "extension:io.substrait:functions_arithmetic", "multiply:i16_i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions71, 1},
+    {"scalar.arithmetic.multiply.i32_i32", "extension:io.substrait:functions_arithmetic", "multiply:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions72, 1},
+    {"scalar.arithmetic.multiply.i64_i64", "extension:io.substrait:functions_arithmetic", "multiply:i64_i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions73, 1},
+    {"scalar.arithmetic.multiply.i8_i8", "extension:io.substrait:functions_arithmetic", "multiply:i8_i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions74, 1},
+    {"scalar.arithmetic.shift_left.i32_i32", "extension:io.substrait:functions_arithmetic", "shift_left:i32_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.shift_left.i64_i32", "extension:io.substrait:functions_arithmetic", "shift_left:i64_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.shift_right.i32_i32", "extension:io.substrait:functions_arithmetic", "shift_right:i32_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.shift_right.i64_i32", "extension:io.substrait:functions_arithmetic", "shift_right:i64_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic.subtract.fp32_fp32", "extension:io.substrait:functions_arithmetic", "subtract:fp32_fp32", FunctionKind::kScalar, "SCALAR", kFunctionOptions79, 1},
+    {"scalar.arithmetic.subtract.fp64_fp64", "extension:io.substrait:functions_arithmetic", "subtract:fp64_fp64", FunctionKind::kScalar, "SCALAR", kFunctionOptions80, 1},
+    {"scalar.arithmetic.subtract.i16_i16", "extension:io.substrait:functions_arithmetic", "subtract:i16_i16", FunctionKind::kScalar, "SCALAR", kFunctionOptions81, 1},
+    {"scalar.arithmetic.subtract.i32_i32", "extension:io.substrait:functions_arithmetic", "subtract:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions82, 1},
+    {"scalar.arithmetic.subtract.i64_i64", "extension:io.substrait:functions_arithmetic", "subtract:i64_i64", FunctionKind::kScalar, "SCALAR", kFunctionOptions83, 1},
+    {"scalar.arithmetic.subtract.i8_i8", "extension:io.substrait:functions_arithmetic", "subtract:i8_i8", FunctionKind::kScalar, "SCALAR", kFunctionOptions84, 1},
+    {"scalar.arithmetic_decimal.abs.dec", "extension:io.substrait:functions_arithmetic_decimal", "abs:dec", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic_decimal.add.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "add:dec_dec", FunctionKind::kScalar, "SCALAR", kFunctionOptions86, 1},
+    {"scalar.arithmetic_decimal.bitwise_and.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "bitwise_and:dec_dec", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.arithmetic_decimal.multiply.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "multiply:dec_dec", FunctionKind::kScalar, "SCALAR", kFunctionOptions88, 1},
+    {"scalar.arithmetic_decimal.subtract.dec_dec", "extension:io.substrait:functions_arithmetic_decimal", "subtract:dec_dec", FunctionKind::kScalar, "SCALAR", kFunctionOptions89, 1},
+    {"scalar.boolean.and.bool", "extension:io.substrait:functions_boolean", "and:bool", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.boolean.not.bool", "extension:io.substrait:functions_boolean", "not:bool", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.boolean.or.bool", "extension:io.substrait:functions_boolean", "or:bool", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.coalesce.any", "extension:io.substrait:functions_comparison", "coalesce:any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.equal.any_any", "extension:io.substrait:functions_comparison", "equal:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.gt.any_any", "extension:io.substrait:functions_comparison", "gt:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.gte.any_any", "extension:io.substrait:functions_comparison", "gte:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.is_not_distinct_from.any_any", "extension:io.substrait:functions_comparison", "is_not_distinct_from:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.is_not_null.any", "extension:io.substrait:functions_comparison", "is_not_null:any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.is_null.any", "extension:io.substrait:functions_comparison", "is_null:any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.lt.any_any", "extension:io.substrait:functions_comparison", "lt:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.lte.any_any", "extension:io.substrait:functions_comparison", "lte:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.comparison.not_equal.any_any", "extension:io.substrait:functions_comparison", "not_equal:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.datetime.extract.req_date", "extension:io.substrait:functions_datetime", "extract:req_date", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.datetime.extract.req_pts", "extension:io.substrait:functions_datetime", "extract:req_pts", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.datetime.extract.req_ptstz", "extension:io.substrait:functions_datetime", "extract:req_ptstz", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.rounding.round.fp32_i32", "extension:io.substrait:functions_rounding", "round:fp32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions106, 1},
+    {"scalar.rounding.round.fp64_i32", "extension:io.substrait:functions_rounding", "round:fp64_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions107, 1},
+    {"scalar.rounding.round.i16_i32", "extension:io.substrait:functions_rounding", "round:i16_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions108, 1},
+    {"scalar.rounding.round.i32_i32", "extension:io.substrait:functions_rounding", "round:i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions109, 1},
+    {"scalar.rounding.round.i64_i32", "extension:io.substrait:functions_rounding", "round:i64_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions110, 1},
+    {"scalar.rounding.round.i8_i32", "extension:io.substrait:functions_rounding", "round:i8_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions111, 1},
+    {"scalar.rounding_decimal.round.dec_i32", "extension:io.substrait:functions_rounding_decimal", "round:dec_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions112, 1},
+    {"scalar.spark.add.date_i32", "extension:io.github.zz-jason:functions_spark", "add:date_i32", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.decimal_divide.dec_dec_dec_req", "extension:io.github.zz-jason:functions_spark", "decimal_divide:dec_dec_dec_req", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.like_escape.str_str_str", "extension:io.github.zz-jason:functions_spark", "like_escape:str_str_str", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.raise_error.str", "extension:io.github.zz-jason:functions_spark", "raise_error:str", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.trunc.dec", "extension:io.github.zz-jason:functions_spark", "trunc:dec", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.try_add.any_any", "extension:io.github.zz-jason:functions_spark", "try_add:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.try_multiply.any_any", "extension:io.github.zz-jason:functions_spark", "try_multiply:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.spark.try_subtract.any_any", "extension:io.github.zz-jason:functions_spark", "try_subtract:any_any", FunctionKind::kScalar, "SCALAR", nullptr, 0},
+    {"scalar.string.concat.str", "extension:io.substrait:functions_string", "concat:str", FunctionKind::kScalar, "SCALAR", kFunctionOptions121, 1},
+    {"scalar.string.contains.str_str", "extension:io.substrait:functions_string", "contains:str_str", FunctionKind::kScalar, "SCALAR", kFunctionOptions122, 1},
+    {"scalar.string.ends_with.str_str", "extension:io.substrait:functions_string", "ends_with:str_str", FunctionKind::kScalar, "SCALAR", kFunctionOptions123, 1},
+    {"scalar.string.like.str_str", "extension:io.substrait:functions_string", "like:str_str", FunctionKind::kScalar, "SCALAR", kFunctionOptions124, 1},
+    {"scalar.string.starts_with.str_str", "extension:io.substrait:functions_string", "starts_with:str_str", FunctionKind::kScalar, "SCALAR", kFunctionOptions125, 1},
+    {"scalar.string.substring.str_i32_i32", "extension:io.substrait:functions_string", "substring:str_i32_i32", FunctionKind::kScalar, "SCALAR", kFunctionOptions126, 1},
+    {"scalar.string.upper.str", "extension:io.substrait:functions_string", "upper:str", FunctionKind::kScalar, "SCALAR", kFunctionOptions127, 1},
+    {"window.arithmetic.cume_dist.none", "extension:io.substrait:functions_arithmetic", "cume_dist:", FunctionKind::kWindow, "WINDOW", nullptr, 0},
+    {"window.arithmetic.dense_rank.none", "extension:io.substrait:functions_arithmetic", "dense_rank:", FunctionKind::kWindow, "WINDOW", nullptr, 0},
+    {"window.arithmetic.percent_rank.none", "extension:io.substrait:functions_arithmetic", "percent_rank:", FunctionKind::kWindow, "WINDOW", nullptr, 0},
+    {"window.arithmetic.rank.none", "extension:io.substrait:functions_arithmetic", "rank:", FunctionKind::kWindow, "WINDOW", nullptr, 0},
+    {"window.arithmetic.row_number.none", "extension:io.substrait:functions_arithmetic", "row_number:", FunctionKind::kWindow, "WINDOW", nullptr, 0},
 }};
 
 const FunctionDescriptor *FindFunction(FunctionKind kind, std::string_view urn, std::string_view signature) {
@@ -144,5 +215,27 @@ const FunctionDescriptor *FindFunction(FunctionKind kind, std::string_view urn, 
     if (function.kind == kind && function.urn == urn && function.signature == signature) return &function;
   }
   return nullptr;
+}
+
+const FunctionOptionDescriptor *FindFunctionOption(const FunctionDescriptor &function, std::string_view name) {
+  for (std::size_t index = 0; index < function.option_count; index++) {
+    if (function.options[index].name == name) return &function.options[index];
+  }
+  return nullptr;
+}
+
+bool FunctionOptionAccepts(const FunctionDescriptor &function, std::string_view name, std::string_view value) {
+  auto option = FindFunctionOption(function, name);
+  if (!option) return false;
+  auto values = option->values_csv;
+  std::size_t start = 0;
+  while (start <= values.size()) {
+    auto end = values.find(',', start);
+    auto candidate = values.substr(start, end == std::string_view::npos ? std::string_view::npos : end - start);
+    if (candidate == value) return true;
+    if (end == std::string_view::npos) break;
+    start = end + 1;
+  }
+  return false;
 }
 }  // namespace io::github::zzjason::substrait::spark::v1
