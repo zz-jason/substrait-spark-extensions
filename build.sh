@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# SPDX-License-Identifier: Apache-2.0
 set -eu
 export PYTHONDONTWRITEBYTECODE=1
 cd "$(dirname "$0")"

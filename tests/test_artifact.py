@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: Apache-2.0
-
 import hashlib
 import json
 import tempfile
@@ -56,6 +54,17 @@ class ArtifactTest(unittest.TestCase):
                 for name, digest in manifest["members"].items():
                     self.assertEqual(digest, hashlib.sha256(archive.read(name)).hexdigest())
 
+
+    def test_artifact_carries_the_licence(self):
+        """The published artifact states the licence of everything it contains."""
+        licence = (ROOT / "LICENSE").read_text()
+        self.assertIn("Apache License", licence)
+        self.assertIn("Version 2.0", licence)
+        with tempfile.TemporaryDirectory() as directory:
+            built = builder.build(Path(directory))
+            with zipfile.ZipFile(Path(built["jar"])) as archive:
+                self.assertIn("LICENSE", archive.namelist())
+                self.assertEqual(licence.encode(), archive.read("LICENSE"))
 
 if __name__ == "__main__":
     unittest.main()
