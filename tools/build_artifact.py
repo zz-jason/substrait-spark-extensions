@@ -25,7 +25,9 @@ def sha256(content: bytes) -> str:
 def payload_paths() -> List[Path]:
     explicit = [
         ROOT / "LICENSE",
+        ROOT / "NOTICE",
         ROOT / "README.md",
+        ROOT / "THIRD-PARTY-NOTICES.md",
         ROOT / "VERSION",
         ROOT / "protocol" / "contract.json",
         ROOT / "protocol" / "contract.schema.json",
