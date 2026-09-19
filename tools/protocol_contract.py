@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
 """Contract loading, canonical digest and validation."""
 
 from __future__ import annotations

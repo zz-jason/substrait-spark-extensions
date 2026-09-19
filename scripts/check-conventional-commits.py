@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Substrait Spark Extensions contributors
-
 """Validate commit subjects and pull/merge request titles as Conventional Commits."""
 
 import argparse
