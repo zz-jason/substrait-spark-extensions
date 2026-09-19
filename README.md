@@ -81,4 +81,4 @@ Published artifacts are immutable. Additive function support requires a minor pr
 
 ## License
 
-Apache License 2.0. See `LICENSE`.
+Apache License 2.0. See `LICENSE`. The contract implements the Substrait specification and its extension conventions, which the Substrait project publishes under Apache License 2.0.
