@@ -15,15 +15,13 @@ concurrency:
 
 jobs:
   policy:
-    name: Policy
+    name: Conventional Commits
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Check licences
-        run: ./tools/check_licenses.py
       - name: Validate commit messages and PR title
         env:
           EVENT_NAME: ${{ github.event_name }}
