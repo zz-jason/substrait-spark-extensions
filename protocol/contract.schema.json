@@ -8,7 +8,8 @@
     "$schema",
     "schemaVersion",
     "protocol",
-    "functions"
+    "functions",
+    "payloads"
   ],
   "properties": {
     "$schema": {
@@ -26,6 +27,9 @@
       "items": {
         "$ref": "#/$defs/function"
       }
+    },
+    "payloads": {
+      "$ref": "#/$defs/payloads"
     }
   },
   "$defs": {
@@ -354,6 +358,169 @@
           }
         }
       ]
+    },
+    "payloadField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "STRING",
+            "NUMBER",
+            "STRUCT",
+            "LIST",
+            "ENUM"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/payloadField"
+          }
+        },
+        "element": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "fields"
+          ],
+          "properties": {
+            "kind": {
+              "const": "STRUCT"
+            },
+            "fields": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/payloadField"
+              }
+            }
+          }
+        },
+        "values": {
+          "$ref": "#/$defs/enumValues"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "STRUCT"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "fields"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "LIST"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "element"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ENUM"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "values"
+            ]
+          }
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "encoding",
+        "typeUrlField",
+        "fields"
+      ],
+      "properties": {
+        "encoding": {
+          "const": "google.protobuf.Struct"
+        },
+        "typeUrlField": {
+          "enum": [
+            "planSemanticsTypeUrl",
+            "sparkReadSemanticsTypeUrl"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rebaseModes": {
+          "$ref": "#/$defs/enumValues"
+        },
+        "sparkTypeNames": {
+          "$ref": "#/$defs/enumValues"
+        },
+        "sparkTypePattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/payloadField"
+          }
+        }
+      }
+    },
+    "payloads": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "planSemantics",
+        "sparkReadSemantics"
+      ],
+      "properties": {
+        "planSemantics": {
+          "$ref": "#/$defs/payload"
+        },
+        "sparkReadSemantics": {
+          "$ref": "#/$defs/payload"
+        }
+      }
     }
   }
 }

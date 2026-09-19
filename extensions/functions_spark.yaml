@@ -20,6 +20,36 @@ scalar_functions:
             options: [RETURN_NULL, THROW_EXCEPTION]
         nullability: DECLARED_OUTPUT
         return: decimal?<P,S>
+  - name: try_add
+    description: Adds two values and returns NULL when the result overflows.
+    impls:
+      - args:
+          - name: left
+            value: any1
+          - name: right
+            value: any1
+        nullability: DECLARED_OUTPUT
+        return: any1?
+  - name: try_subtract
+    description: Subtracts two values and returns NULL when the result overflows.
+    impls:
+      - args:
+          - name: left
+            value: any1
+          - name: right
+            value: any1
+        nullability: DECLARED_OUTPUT
+        return: any1?
+  - name: try_multiply
+    description: Multiplies two values and returns NULL when the result overflows.
+    impls:
+      - args:
+          - name: left
+            value: any1
+          - name: right
+            value: any1
+        nullability: DECLARED_OUTPUT
+        return: any1?
   - name: add
     description: Adds a signed number of days to a date using Spark SQL DateAdd semantics.
     impls:
@@ -57,6 +87,17 @@ scalar_functions:
             value: string
         return: boolean
 aggregate_functions:
+  - name: grouping
+    description: >-
+      Reports which grouping set a row was produced from, using Spark SQL grouping()
+      positional semantics on the referenced grouping columns. The consumer lowers it
+      from the AggregateRel grouping sets and does not read aggregate state.
+    impls:
+      - args:
+          - name: group
+            value: any1
+        nullability: DECLARED_OUTPUT
+        return: i32
   - name: stddev_samp
     description: >-
       Computes Spark SQL sample standard deviation with mergeable floating-point state and null

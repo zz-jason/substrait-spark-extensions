@@ -1,36 +1,123 @@
 {
-  "schemaVersion": 1,
-  "protocolVersion": "1.0.0",
-  "canonicalSha256": "98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1",
+  "schemaVersion": 2,
+  "protocolVersion": "0.1.0",
+  "canonicalSha256": "5bb708ae2643f963e9a52812ab2e7aaea7aa17353f9afdf8afba78c6d764b165",
   "substraitVersion": "0.98.0",
   "matching": "EXACT_KIND_URN_COMPOUND_SIGNATURE",
   "unsupportedBehavior": "REJECT_BEFORE_BINDING_OR_EXECUTION",
   "planSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics",
   "sparkReadSemanticsTypeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics",
-  "readSemantics": {
-    "calendarRebaseModes": [
-      "CORRECTED",
-      "EXCEPTION",
-      "LEGACY"
-    ],
-    "int96TimestampConversions": [
-      "INT96_TIMESTAMP_CONVERSION_DISABLED",
-      "INT96_TIMESTAMP_CONVERSION_ENABLED"
-    ],
-    "parquetTimestampEncodings": [
-      "INT64_MICROS",
-      "INT64_MILLIS",
-      "INT64_NANOS",
-      "INT96"
-    ],
-    "physicalTimestampSemantics": [
-      "LOCAL_DATETIME",
-      "UTC_INSTANT"
-    ],
-    "sparkTimestampIdentities": [
-      "SPARK_TIMESTAMP_LTZ",
-      "SPARK_TIMESTAMP_NTZ"
-    ]
+  "payloads": {
+    "planSemantics": {
+      "typeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics",
+      "encoding": "google.protobuf.Struct",
+      "fields": [
+        {
+          "name": "canonical_sha256",
+          "kind": "STRING"
+        },
+        {
+          "name": "protocol_version",
+          "kind": "STRING"
+        },
+        {
+          "name": "substrait_version",
+          "kind": "STRING"
+        }
+      ]
+    },
+    "sparkReadSemantics": {
+      "typeUrl": "type.googleapis.com/io.github.zzjason.substrait.spark.v1.SparkReadSemantics",
+      "encoding": "google.protobuf.Struct",
+      "fields": [
+        {
+          "name": "calendar_rebase",
+          "kind": "STRUCT",
+          "fields": [
+            {
+              "name": "parquet_datetime_read",
+              "kind": "STRING"
+            },
+            {
+              "name": "parquet_int96_read",
+              "kind": "STRING"
+            }
+          ]
+        },
+        {
+          "name": "partition_columns",
+          "kind": "LIST",
+          "element": {
+            "kind": "STRUCT",
+            "fields": [
+              {
+                "name": "name",
+                "kind": "STRING"
+              },
+              {
+                "name": "spark_type",
+                "kind": "STRING"
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_version",
+          "kind": "NUMBER"
+        },
+        {
+          "name": "session_timezone",
+          "kind": "STRING"
+        },
+        {
+          "name": "timestamp_fields",
+          "kind": "LIST",
+          "element": {
+            "kind": "STRUCT",
+            "fields": [
+              {
+                "name": "field_path",
+                "kind": "STRING"
+              },
+              {
+                "name": "physical_semantics",
+                "kind": "ENUM",
+                "values": [
+                  "LOCAL_DATETIME",
+                  "UTC_INSTANT"
+                ]
+              },
+              {
+                "name": "spark_type",
+                "kind": "ENUM",
+                "values": [
+                  "LTZ",
+                  "NTZ"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "version": 1,
+      "rebaseModes": [
+        "CORRECTED"
+      ],
+      "sparkTypeNames": [
+        "BIGINT",
+        "BOOLEAN",
+        "DATE",
+        "DOUBLE",
+        "FLOAT",
+        "INT",
+        "SMALLINT",
+        "STRING",
+        "TIMESTAMP",
+        "TIMESTAMP_NTZ",
+        "TINYINT"
+      ],
+      "sparkTypePattern": "^DECIMAL\\([0-9]+,[0-9]+\\)$"
+    }
   },
   "functions": [
     {
@@ -559,6 +646,16 @@
       }
     },
     {
+      "id": "aggregate.spark.grouping.any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "grouping:any",
+      "kind": "AGGREGATE",
+      "callSites": [
+        "AGGREGATE"
+      ],
+      "options": {}
+    },
+    {
       "id": "aggregate.spark.max.any",
       "urn": "extension:io.github.zz-jason:functions_spark",
       "signature": "max:any",
@@ -974,6 +1071,102 @@
         "on_division_by_zero": [
           "ERROR",
           "NULL"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i16_i16",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i16_i16",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i32_i32",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i32_i32",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i64_i64",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i64_i64",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
+        ],
+        "on_domain_error": [
+          "ERROR",
+          "NULL"
+        ],
+        "overflow": [
+          "ERROR",
+          "SATURATE",
+          "SILENT"
+        ]
+      }
+    },
+    {
+      "id": "scalar.arithmetic.modulus.i8_i8",
+      "urn": "extension:io.substrait:functions_arithmetic",
+      "signature": "modulus:i8_i8",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {
+        "division_type": [
+          "FLOOR",
+          "TRUNCATE"
         ],
         "on_domain_error": [
           "ERROR",
@@ -1659,6 +1852,36 @@
       "id": "scalar.spark.trunc.dec",
       "urn": "extension:io.github.zz-jason:functions_spark",
       "signature": "trunc:dec",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.spark.try_add.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_add:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.spark.try_multiply.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_multiply:any_any",
+      "kind": "SCALAR",
+      "callSites": [
+        "SCALAR"
+      ],
+      "options": {}
+    },
+    {
+      "id": "scalar.spark.try_subtract.any_any",
+      "urn": "extension:io.github.zz-jason:functions_spark",
+      "signature": "try_subtract:any_any",
       "kind": "SCALAR",
       "callSites": [
         "SCALAR"

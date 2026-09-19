@@ -2,36 +2,37 @@
 
 This repository is the implementation-neutral canonical protocol for Spark SQL plans exchanged through Substrait. It defines the contract that any producer or consumer can implement, including engines such as ClickHouse, DataFusion, Velox, and future runtimes.
 
-Protocol version `1.0.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
+Protocol version `0.1.0` removes implementation capability snapshots from the canonical contract. Engine-specific support matrices, function mappings, execution code, and release metadata belong in each implementation repository.
 
 ## Contents
 
-- `protocol/contract.json`: canonical function identities, kinds, protocol option values, metadata identity, protocol version, and canonical SHA-256.
+- `protocol/contract.json`: canonical function identities, kinds, protocol option values, the `google.protobuf.Struct` payload schemas, metadata identity, protocol version, and canonical SHA-256.
 - `protocol/contract.schema.json`: closed JSON Schema draft 2020-12 contract.
 - `extensions/functions_spark.yaml`: canonical Spark SQL function extension definitions.
-- `proto/substrait_spark_extensions.proto`: `PlanSemantics` and `SparkReadSemantics` under `io.github.zzjason.substrait.spark.v1`.
 - `capabilities/capabilities.json`: generated, implementation-neutral protocol capability projection.
-- `generated/scala`: dependency-free Scala protocol identities and function catalog.
-- `generated/cpp`: dependency-free C++17 protocol identities and function catalog.
+- `generated/scala`: dependency-free Scala protocol identities, function catalog, and payload schema.
+- `generated/cpp`: dependency-free C++17 protocol identities, function catalog, and payload schema.
 - `tools/generate.py`: deterministic Python standard-library validator and generator.
 - `tools/build_artifact.py`: reproducible ZIP-compatible JAR builder.
-- `tests/test_protocol.py`: contract, generation, protobuf, neutrality, and reproducibility tests.
+- `tests/test_protocol.py`: contract, generation, payload schema, neutrality, and reproducibility tests.
 
-The contract contains 125 exact function identities. Ten use `extension:io.github.zz-jason:functions_spark`; the remaining identities use official Substrait 0.98 extension URNs. Function identity is the exact tuple `(kind, URN, compound signature)`. Bare names and inferred URNs are outside the protocol.
+The contract contains 133 exact function identities. Fourteen use `extension:io.github.zz-jason:functions_spark`; the remaining identities use official Substrait 0.98 extension URNs. Function identity is the exact tuple `(kind, URN, compound signature)`. Bare names and inferred URNs are outside the protocol.
 
 Function options list the values that can appear in a conforming Spark SQL protocol plan. Every consumer publishes its own support matrix and must reject an unsupported identity or option before binding or execution.
 
 ## Protocol identity
 
-- Protocol version: `1.0.0`
+- Protocol version: `0.1.0`
 - Substrait version: `0.98.0`
 - Custom function URN: `extension:io.github.zz-jason:functions_spark`
-- Canonical SHA-256: `98ae4703b56a1a2b56f4f090adfc9a12a3f17931674b803d6196bb80a9aba0a1`
-- Function extension SHA-256: `9d9f0d2d4585f2e2166b76293dcfd3e1cdb1ce1483a122ff4a931221be92c9a1`
+- Canonical SHA-256: `ec349b61205080c99ad0a8cb3b0e3389a77f6ebd5f2bd47d3f479829a3d44940`
+- Function extension SHA-256: `db4fb05f290ba6652742cea4f3c95c022c3f155858e37076c0cd85bcfdda480e`
 
 The canonical contract digest is SHA-256 over UTF-8 JSON serialized with sorted keys and compact separators after removing `protocol.canonicalSha256`. The contract uses only closed structured output operations and contains no executable expressions.
 
-Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `1.0.0` and the canonical digest. Its type URL is:
+`Any.value` for both type URLs is a serialized `google.protobuf.Struct`. `protocol/contract.json` under `payloads` is the only definition of each payload's fields, nesting, and enum values, and it is generated into both the Scala and the C++ payload schemas. A payload with an unknown or missing field is invalid.
+
+Every conforming plan carries `PlanSemantics` in `Plan.advanced_extensions.enhancement` with protocol version `0.1.0` and the canonical digest. Its type URL is:
 
 ```text
 type.googleapis.com/io.github.zzjason.substrait.spark.v1.PlanSemantics
