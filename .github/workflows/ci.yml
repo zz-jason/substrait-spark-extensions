@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  policy:
+    name: Conventional Commits
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Validate commit messages and PR title
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_HEAD: ${{ github.sha }}
+        run: |
+          if [[ "$EVENT_NAME" == pull_request ]]; then
+            ./scripts/check-conventional-commits.py \
+              --title "$PR_TITLE" --range "$PR_BASE..$PR_HEAD"
+          elif [[ -n "$PUSH_BEFORE" && ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+            ./scripts/check-conventional-commits.py --range "$PUSH_BEFORE..$PUSH_HEAD"
+          else
+            ./scripts/check-conventional-commits.py --range "$PUSH_HEAD^..$PUSH_HEAD"
+          fi
+
+  build:
+    name: Contract, generator, tests, artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build and validate the protocol
+        run: ./build.sh
+      - name: Upload the distribution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: substrait-spark-extensions
+          path: dist/
+          retention-days: 7
