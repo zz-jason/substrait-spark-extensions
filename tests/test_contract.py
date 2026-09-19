@@ -2,43 +2,32 @@
 
 import copy
 import hashlib
-import importlib.util
 import json
-import shutil
-import subprocess
 import tempfile
 import unittest
-import zipfile
 from collections import Counter
+from pathlib import Path
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
 
-
-def load_module(name, path):
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(module)
-    return module
-
-
-generate = load_module("protocol_generate", ROOT / "tools" / "generate.py")
-builder = load_module("protocol_builder", ROOT / "tools" / "build_artifact.py")
-
+import protocol_contract  # noqa: E402
+import protocol_render  # noqa: E402
 
 class ContractTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.contract = generate.load_json(ROOT / "protocol" / "contract.json")
+        cls.contract = protocol_contract.load_json(ROOT / "protocol" / "contract.json")
 
     def test_contract_validates_and_has_canonical_identity(self):
-        generate.validate_contract(self.contract)
+        protocol_contract.validate_contract(self.contract)
         self.assertEqual("0.1.0", self.contract["protocol"]["version"])
         # The digest is derived from the contract content, so it is checked instead of pinned.
         self.assertEqual(
             self.contract["protocol"]["canonicalSha256"],
-            generate.canonical_sha256(self.contract),
+            protocol_contract.canonical_sha256(self.contract),
         )
 
     def test_contract_is_implementation_neutral(self):
@@ -142,8 +131,8 @@ class ContractTest(unittest.TestCase):
         self.assertEqual(["CORRECTED"], read["rebaseModes"])
 
     def test_contract_uses_only_closed_structured_formulas(self):
-        allowed_output = set(generate.OUTPUT_OPS)
-        allowed_integer = set(generate.INTEGER_OPS)
+        allowed_output = set(protocol_contract.OUTPUT_OPS)
+        allowed_integer = set(protocol_contract.INTEGER_OPS)
 
         def inspect_formula(formula):
             self.assertIn(formula["op"], allowed_integer)
@@ -171,7 +160,7 @@ class ContractTest(unittest.TestCase):
         )
 
     def test_schema_is_closed_draft_2020_12(self):
-        schema = generate.load_json(ROOT / "protocol" / "contract.schema.json")
+        schema = protocol_contract.load_json(ROOT / "protocol" / "contract.schema.json")
         self.assertEqual("https://json-schema.org/draft/2020-12/schema", schema["$schema"])
         self.assertFalse(schema["additionalProperties"])
         self.assertFalse(schema["$defs"]["function"]["additionalProperties"])
@@ -180,14 +169,14 @@ class ContractTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "duplicate.json"
             path.write_text('{"a":1,"a":2}\n', encoding="utf-8")
-            with self.assertRaises(generate.ContractError):
-                generate.load_json(path)
+            with self.assertRaises(protocol_contract.ContractError):
+                protocol_contract.load_json(path)
 
     def test_semantic_mutation_invalidates_the_digest(self):
         changed = copy.deepcopy(self.contract)
         changed["functions"][0]["signature"] = "changed:i8"
-        with self.assertRaises(generate.ContractError):
-            generate.validate_contract(changed)
+        with self.assertRaises(protocol_contract.ContractError):
+            protocol_contract.validate_contract(changed)
 
     def test_tracked_protocol_files_are_implementation_neutral(self):
         prohibited = "du" + "ck" + "db"
@@ -210,7 +199,7 @@ class ProtoTest(unittest.TestCase):
         self.assertFalse((ROOT / "proto").exists())
 
     def test_type_urls_match_proto_package(self):
-        contract = generate.load_json(ROOT / "protocol" / "contract.json")
+        contract = protocol_contract.load_json(ROOT / "protocol" / "contract.json")
         package = contract["protocol"]["protoPackage"]
         self.assertEqual(
             f"type.googleapis.com/{package}.PlanSemantics",
@@ -222,65 +211,3 @@ class ProtoTest(unittest.TestCase):
         )
 
 
-class GenerationTest(unittest.TestCase):
-    def test_generated_files_are_current_and_deterministic(self):
-        contract = generate.load_json(ROOT / "protocol" / "contract.json")
-        first = generate.rendered_files(contract)
-        second = generate.rendered_files(contract)
-        self.assertEqual(first, second)
-        generate.check_rendered(first)
-
-    def test_generated_identity_constants_contain_canonical_digest(self):
-        digest = generate.load_json(ROOT / "protocol" / "contract.json")["protocol"]["canonicalSha256"]
-        scala = (ROOT / "generated/scala/io/github/zzjason/substrait/spark/v1/ProtocolIdentity.scala").read_text()
-        cpp = (ROOT / "generated/cpp/include/substrait_spark/protocol_identity.hpp").read_text()
-        self.assertIn(digest, scala)
-        self.assertIn(digest, cpp)
-
-    @unittest.skipUnless(shutil.which("g++"), "g++ is not installed")
-    def test_generated_cpp_catalog_compiles_as_cpp17(self):
-        with tempfile.TemporaryDirectory() as directory:
-            subprocess.run(
-                [
-                    "g++", "-std=c++17", "-Wall", "-Wextra", "-Werror",
-                    "-I", str(ROOT / "generated/cpp/include"),
-                    "-c", str(ROOT / "generated/cpp/src/function_catalog.cpp"),
-                    "-o", str(Path(directory) / "function_catalog.o"),
-                ],
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-
-
-class ArtifactTest(unittest.TestCase):
-    def test_artifact_is_byte_reproducible_and_zip_compatible(self):
-        with tempfile.TemporaryDirectory() as first_directory, tempfile.TemporaryDirectory() as second_directory:
-            first = builder.build(Path(first_directory))
-            second = builder.build(Path(second_directory))
-            first_jar = Path(first["jar"])
-            second_jar = Path(second["jar"])
-            self.assertEqual(first_jar.read_bytes(), second_jar.read_bytes())
-            self.assertEqual(first["artifactSha256"], second["artifactSha256"])
-            self.assertEqual(first_jar.read_bytes(), Path(first["zip"]).read_bytes())
-            with zipfile.ZipFile(first_jar) as archive:
-                infos = archive.infolist()
-                names = [info.filename for info in infos]
-                self.assertEqual("META-INF/MANIFEST.MF", names[0])
-                self.assertEqual(sorted(names[1:], key=lambda value: value.encode("ascii")), names[1:])
-                self.assertTrue(all(info.date_time == builder.FIXED_TIMESTAMP for info in infos))
-                self.assertTrue(all(info.compress_type == zipfile.ZIP_STORED for info in infos))
-                self.assertIn("protocol/contract.json", names)
-                self.assertIn("substrait/extensions/functions_spark.yaml", names)
-                self.assertIn("scala/io/github/zzjason/substrait/spark/v1/FunctionCatalog.scala", names)
-                self.assertIn("cpp/include/substrait_spark/function_catalog.hpp", names)
-                manifest = json.loads(
-                    archive.read("META-INF/substrait-spark/protocol-manifest.json")
-                )
-                self.assertEqual(first["canonicalSha256"], manifest["canonicalSha256"])
-                for name, digest in manifest["members"].items():
-                    self.assertEqual(digest, hashlib.sha256(archive.read(name)).hexdigest())
-
-
-if __name__ == "__main__":
-    unittest.main()

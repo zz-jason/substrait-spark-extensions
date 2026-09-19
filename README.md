@@ -12,9 +12,11 @@ Protocol version `0.1.0` removes implementation capability snapshots from the ca
 - `capabilities/capabilities.json`: generated, implementation-neutral protocol capability projection.
 - `generated/scala`: dependency-free Scala protocol identities, function catalog, and payload schema.
 - `generated/cpp`: dependency-free C++17 protocol identities, function catalog, and payload schema.
-- `tools/generate.py`: deterministic Python standard-library validator and generator.
+- `tools/generate.py`: command line entry point for validation and generation.
+- `tools/protocol_contract.py`: contract loading, canonical digest, and validation rules.
+- `tools/protocol_render.py`: rendering of the generated catalogs and the capability snapshot.
 - `tools/build_artifact.py`: reproducible ZIP-compatible JAR builder.
-- `tests/test_protocol.py`: contract, generation, payload schema, neutrality, and reproducibility tests.
+- `tests/test_contract.py`, `tests/test_generate.py`, `tests/test_artifact.py`: contract, generation, and reproducibility tests.
 
 The contract contains 133 exact function identities. Fourteen use `extension:io.github.zz-jason:functions_spark`; the remaining identities use official Substrait 0.98 extension URNs. Function identity is the exact tuple `(kind, URN, compound signature)`. Bare names and inferred URNs are outside the protocol.
 
